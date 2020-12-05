@@ -21,7 +21,7 @@ git clone https://github.com/Lienol/openwrt-package.git package/Lienol
 git clone https://github.com/gogogojason/luci-theme-edge -b 18.06 package/lean/luci-theme-edge
 
 # 更新并安装源
-./scripts/feeds clean
+#./scripts/feeds clean
 ./scripts/feeds update -a && ./scripts/feeds install -a
 
 # 删除部分默认包
