@@ -1,8 +1,8 @@
 # OpenWrt-AutoBuild
 
 #### 基于OpenWrt-Actions-Lean+Lienol-自动化在线编译脚本  
-在仓库Settings->Secrets中分别添加 PPPOE_USERNAME, PPPOE_PASSWD 可设置默认拨号账号密码.有 安全隐患
 
+云编译需要 在此 创建个token,然后在此仓库Settings->Secrets中添加个名字为REPO_TOKEN的Secret,填入token值,否者无法release
 Secrets中添加 SCKEY 可通过Server酱 推送编译结果到微信
   
 
