@@ -1,3 +1,9 @@
+ From cb934ac9c803e44b6d459fa1da774d2e92afcf9c Mon Sep 17 00:00:00 2001
+From: garypang13 <48883331+garypang13@users.noreply.github.com>
+Date: Fri, 9 Oct 2020 16:23:31 +0800
+Subject: [PATCH] Update 102-mt7621-fix-cpu-clk-add-clkdev.patch
+
+---
  .../patches-5.4/102-mt7621-fix-cpu-clk-add-clkdev.patch   | 8 ++++++--
  1 file changed, 6 insertions(+), 2 deletions(-)
 
