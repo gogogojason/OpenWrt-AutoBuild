@@ -7,7 +7,7 @@
 #
 
 
-name: 编译OpenWrt固件
+name: 编译RM2100测试
 
 on:
   workflow_dispatch:
@@ -42,7 +42,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [Lean_x86_64]  #[Lean_x86_64,All_RM2100,Sim_RM2100,Ap_RM2100,Lienol_x86_64,]
+        target: [Test]  #[Lean_x86_64,All_RM2100,Sim_RM2100,Ap_RM2100,Lienol_x86_64,]
 
     steps:
     - name: 准备完成
@@ -117,7 +117,10 @@ jobs:
         if [ -n "$(ls -A "build/${{matrix.target}}/sources" 2>/dev/null)" ]; then
          cp -Rf build/${{matrix.target}}/sources/* ./
         fi
-
+        echo "打补丁"
+        if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
+          find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
+        fi
         echo "写入配置文件"
          mv build/${{matrix.target}}/$CONFIG_FILE .config
         make defconfig
@@ -150,84 +153,73 @@ jobs:
         du -h --max-depth=1 openwrt/build_dir
         du -h --max-depth=1 openwrt/bin
 
-    - name: 整理固件文件
+    - name: 整理固件文件夹
       id: organizer
       run: |
-        mkdir -p ./artifact/firmware
-        mkdir -p ./artifact/vmware
-        mkdir -p ./artifact/package
-        mkdir -p ./artifact/buildinfo
-        rm -rf $(find openwrt/bin/targets/ -type d -name "packages")
-        cp -rf $(find openwrt/bin/packages/ -type f -name "*.ipk") ./artifact/package/
-        cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
-        cp -rf $(find openwrt/bin/targets/ -type f -name "*combined*img*") ./artifact/firmware/
-        cp -rf $(find openwrt/bin/targets/ -type f -name "*combined*vmdk*") ./artifact/vmware/
-        echo "::set-output name=status::success"
-
-    - name: 上传固件文件
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true'
+        mkdir config
+        find openwrt/bin/targets/ -name "*config.buildinfo*" | xargs -i mv -f {} config
+        cd openwrt/bin/targets/*/*
+        rm -rf packages && mkdir packages
+        find -name "*buildinfo*" | xargs -i mv -f {} packages
+        find -name "*sha256sums*" | xargs -i mv -f {} packages
+        find -name "*kernel.bin*" | xargs -i mv -f {} packages
+        find -name "*kernel1.bin*" | xargs -i mv -f {} packages
+        find -name "*manifest*" | xargs -i mv -f {} packages
+        find -name "*vmlinuz*" | xargs -i mv -f {} packages
+        find -name "*esxi.vmdk*" | xargs -i mv -f {} packages
+        find -name "*Image*" | xargs -i mv -f {} packages
+        find -name "*rootfs-squashfs*" | xargs -i mv -f {} packages
+        find -name "*squashfs-rootfs*" | xargs -i mv -f {} packages
+        rm -rf packages
+        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+        echo "::set-output name=status::success 
+        
+    - name: 上传.config配置文件在github空间
       uses: actions/upload-artifact@v2
+      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_CONFIG == 'true'
+      with:
+        name: .config_${{matrix.target}}_${{ env.FILE_DATE }}
+        path: ./config
+
+    - name: 上传固件在github空间
+      uses: actions/upload-artifact@v2
+      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true'
       with:
         name: OpenWrt_firmware_${{matrix.target}}_${{ env.FILE_DATE }}
-        path: ./artifact/firmware/
+        path: ${{ env.FIRMWARE }}
 
-    - name: 上传vmware镜像文件
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_VMDK == 'true'
-      uses: actions/upload-artifact@v2
-      with:
-        name: OpenWrt_vmware_${{matrix.target}}_${{ env.FILE_DATE }}
-        path: ./artifact/vmware/
-
-    - name: 上传插件包文件
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_IPK == 'true'
-      uses: actions/upload-artifact@v2
-      with:
-        name: OpenWrt_package_${{matrix.target}}_${{ env.FILE_DATE }}
-        path: ./artifact/package/
-
-    - name: 上传固件配置信息
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_CONFIG == 'true'
-      uses: actions/upload-artifact@v2
-      with:
-        name: OpenWrt_buildinfo_${{matrix.target}}_${{ env.FILE_DATE }}
-        path: ./artifact/buildinfo/
-
-    - name: 上传固件到 奶牛快传
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true'
+    - name: 上传固件到「奶牛快传」和「WeTransfer」
+      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
       run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress ./artifact/firmware/ 2>&1 | tee cowtransfer.log
+        ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
         echo "::warning file=奶牛快传（${{matrix.target}}）::$(cat cowtransfer.log | grep https)"
-
-    - name: 上传固件到 WeTransfer
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true'
-      run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer wet -s -p 16 --no-progress ./artifact/firmware/ 2>&1 | tee wetransfer.log
+        ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
         echo "::warning file=WeTransfer（${{matrix.target}}）::$(cat wetransfer.log | grep https)"
     
-    - name: 提取发布用的「奶牛快传」和「WeTransfer」的链接
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true'
+    - name: 提取发布用的「奶牛快传」跟「WeTransfer」的链接
+      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' || (github.event.inputs.release == 'release' && github.event.inputs.release  != 'false')
       run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress ./artifact/firmware/ 2>&1 | tee cowtransfer.log
+        ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
         echo "COWTRANSFER_URL=$(cat cowtransfer.log | grep https | cut -f3 -d" ")" >> $GITHUB_ENV 
         curl -fsSL git.io/file-transfer | sh
-        ./transfer wet -s -p 16 --no-progress ./artifact/firmware/ 2>&1 | tee wetransfer.log
-        echo "WETRANSFER_URL=$(cat wetransfer.log | grep https | cut -f3 -d" ")" >> $GITHUB_ENV 
-
-    - name: 自动发布固件到 Releases
+        ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
+        echo "WETRANSFER_URL=$(cat wetransfer.log | grep https | cut -f3 -d" ")" >> $GITHUB_ENV     
+    
+    - name: 自动发布固件
       uses: softprops/action-gh-release@v1
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true'
+      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' || (github.event.inputs.release == 'release' && github.event.inputs.release  != 'false')
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
-        name: ${{ env.FILE_DATE1 }} 「 ${{ env.WXFB_MESSAGE }} 」固件
-        tag_name: ${{ env.FILE_DATE2 }}-${{matrix.target}}
-        body: |            
-            ☆  源码 : ${{ env.REPO_URL }}
-            ☆  分支 : ${{ env.REPO_BRANCH }}
-            ☆  感谢源码作者无私分享！
+        name: ${{ FILE_DATE1 }} 「 ${{ env.WXFB_MESSAGE }} 」固件
+        tag_name: ${{ FILE_DATE2 }}
+        body: |
+            ☆  源码 : ${{ env.REPO_URL }}  <br>
+            ☆  分支 : ${{ env.REPO_BRANCH }}  <br>
+            ☆  感谢源码作者无私分享！ <br>
             
             🎉 [ ${{ env.WXFB_MESSAGE }} ]固件下载 ✨
             
@@ -236,11 +228,8 @@ jobs:
             ⛄ WeTransfer(国外高速🚀下载)： ${{ env.WETRANSFER_URL }}
             
             🌴 链接有效期为7天，无需注册直接下载 🐤
-            
-            =========================================
-            
-        files: ./artifact/firmware/*
-
+        files: ${{ env.FIRMWARE }}/*
+    
     - name: 删除旧的GitHub-workflow
       uses: ActionsRML/delete-workflow-runs@main
       with:
