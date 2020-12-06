@@ -1,0 +1,174 @@
+
+config smartdns
+	option port '6053'
+	option tcp_server '1'
+	option dualstack_ip_selection '0'
+	option serve_expired '0'
+	option redirect 'none'
+	option rr_ttl_min '300'
+	option seconddns_tcp_server '1'
+	option seconddns_no_speed_check '0'
+	option seconddns_no_rule_addr '0'
+	option seconddns_no_rule_nameserver '0'
+	option seconddns_no_rule_ipset '0'
+	option seconddns_no_rule_soa '0'
+	option seconddns_no_dualstack_selection '0'
+	option seconddns_no_cache '0'
+	option force_aaaa_soa '0'
+	option coredump '0'
+	option prefetch_domain '1'
+	option cache_size '300'
+	option ipv6_server '0'
+	option rr_ttl_max '3600'
+	option seconddns_enabled '1'
+	option seconddns_server_group 'us'
+	option server_name 'china'
+	option seconddns_port '7913'
+	list old_redirect 'none'
+	list old_port '6053'
+	list old_enabled '0'
+
+config server
+	option enabled '1'
+	option ip '8.8.8.8'
+	option type 'tls'
+	option name 'google DNS'
+	option server_group 'us'
+	option blacklist_ip '0'
+
+config server
+	option enabled '1'
+	option ip '8.8.4.4'
+	option type 'tls'
+	option name 'google DNS'
+	option server_group 'us'
+	option blacklist_ip '0'
+
+config server
+	option enabled '1'
+	option ip '208.67.222.222'
+	option type 'tls'
+	option name 'open DNS'
+	option server_group 'us'
+	option blacklist_ip '0'
+
+config server
+	option enabled '1'
+	option name 'google DNS'
+	option ip '8.8.8.8'
+	option type 'tcp'
+	option server_group 'us'
+	option blacklist_ip '0'
+
+config server
+	option enabled '1'
+	option name 'open DNS'
+	option ip '208.67.222.222'
+	option type 'tcp'
+	option server_group 'us'
+	option blacklist_ip '0'
+
+config server
+	option enabled '1'
+	option name 'google DNS'
+	option ip '8.8.4.4'
+	option type 'tcp'
+	option server_group 'us'
+	option blacklist_ip '0'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option ip '223.5.5.5'
+	option server_group 'china'
+	option blacklist_ip '0'
+	option name '???? DNS1'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option ip '223.6.6.6'
+	option server_group 'china'
+	option blacklist_ip '0'
+	option name '???? DNS1'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option ip '117.50.11.11'
+	option server_group 'china'
+	option blacklist_ip '0'
+	option name 'one DNS??1'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option ip '52.80.66.66'
+	option server_group 'china'
+	option blacklist_ip '0'
+	option name 'one DNS??2'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option ip '117.50.10.10'
+	option server_group 'china'
+	option blacklist_ip '0'
+	option name 'one DNS????1'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option ip '52.80.52.52'
+	option server_group 'china'
+	option blacklist_ip '0'
+	option name 'one DNS????1'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option ip '114.114.114.114'
+	option name '114 DNS1'
+	option server_group 'china'
+	option blacklist_ip '0'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option ip '114.114.115.115'
+	option name '114 DNS2'
+	option server_group 'china'
+	option blacklist_ip '0'
+
+config server
+	option enabled '1'
+	option ip '221.179.155.161'
+	option type 'tcp'
+	option name 'bendidns1'
+	option server_group 'china'
+	option blacklist_ip '0'
+
+config server
+	option enabled '1'
+	option ip '221.179.155.177'
+	option type 'tcp'
+	option name 'bendidns2'
+	option server_group 'china'
+	option blacklist_ip '0'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option name 'bendidns3'
+	option ip '221.179.155.161'
+	option server_group 'china'
+	option blacklist_ip '0'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option name 'bendidns4'
+	option ip '221.179.155.177'
+	option server_group 'china'
+	option blacklist_ip '0'
+
