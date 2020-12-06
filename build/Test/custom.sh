@@ -76,9 +76,9 @@ sed -i "s/R20.10.20/R20.10.20\/hfy166 Ver.$ver_name/g" package/lean/default-sett
 #sed -i 's@e5effd@f8fbfe@g' package/dbone-update/luci-theme-edge/htdocs/luci-static/edge/cascade.css #luci-theme-edge主题颜色微调
 #sed -i 's#223, 56, 18, 0.04#223, 56, 18, 0.02#g' package/dbone-update/luci-theme-edge/htdocs/luci-static/edge/cascade.css #luci-theme-edge主题颜色微调
 
-#创建自定义配置文件 - Ap_RM2100
+#创建自定义配置文件 - Test
 
-cd build/Ap_RM2100
+cd build/Test
 touch ./.config
 
 #
