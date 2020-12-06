@@ -5,15 +5,16 @@
 # sudo -E apt-get -y install rename
 
 # 更新feeds文件
-# sed -i 's@#src-git helloworld@src-git helloworld@g' feeds.conf.default #启用helloworld
+#sed -i 's/#src-git helloworld https:\/\/github.com\/fw876\/helloworld/src-git otherpackages https:\/\/github.com\/kenzok8\/openwrt-packages.git/g' feeds.conf.default #启用helloworld
 cat feeds.conf.default
-
+sed -i '$a src-git otherpackages https://github.com/kenzok8/openwrt-packages.git' feeds.conf.default
+sed -i '$a src-git small https://github.com/kenzok8/small.git' feeds.conf.default
 
 # 添加第三方软件包
 git clone https://github.com/gogogojason/luci-theme-edge -b 18.06 package/lean/luci-theme-edge
 git clone https://github.com/db-one/dbone-update.git -b 18.06 package/dbone-update
 git clone https://github.com/kenzok8/small.git package/small
-git clone https://github.com/kenzok8/openwrt-packages.git package/otherpackages
+#git clone https://github.com/kenzok8/openwrt-packages.git package/otherpackages
 git clone https://github.com/281677160/openwrt-package.git package/otherpackages2
 git clone --depth=1 https://github.com/tty228/luci-app-serverchan.git package/lean/luci-app-serverchan
 #git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/lean/luci-app-adguardhome
