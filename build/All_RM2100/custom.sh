@@ -159,6 +159,9 @@ CONFIG_PACKAGE_UnblockNeteaseMusic=y
 CONFIG_PACKAGE_UnblockNeteaseMusicGo=y
 CONFIG_PACKAGE_luci-app-wol=y
 CONFIG_PACKAGE_luci-app-upnp=y
+CONFIG_PACKAGE_luci-app-filetransfer=y #系统-文件传输
+CONFIG_PACKAGE_luci-app-autoreboot=y #定时重启
+CONFIG_PACKAGE_luci-app-accesscontrol=y #上网时间控制
 EOF
 
 # 插件汉化包:
