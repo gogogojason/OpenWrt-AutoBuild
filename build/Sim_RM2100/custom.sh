@@ -10,6 +10,7 @@ cat feeds.conf.default
 
 
 # 添加第三方软件包
+git clone https://github.com/gogogojason/luci-theme-edge -b 18.06 package/lean/luci-theme-edge
 git clone https://github.com/db-one/dbone-update.git -b 18.06 package/dbone-update
 git clone https://github.com/kenzok8/small.git package/small
 git clone https://github.com/kenzok8/openwrt-packages.git package/otherpackages
@@ -19,7 +20,6 @@ git clone --depth=1 https://github.com/tty228/luci-app-serverchan.git package/le
 #git clone https://github.com/jerrykuku/lua-maxminddb.git package/lean/lua-maxminddb
 #git clone https://github.com/jerrykuku/luci-app-vssr.git package/lean/luci-app-vssr
 git clone https://github.com/Lienol/openwrt-package.git package/Lienol
-git clone https://github.com/gogogojason/luci-theme-edge -b 18.06 package/lean/luci-theme-edge
 
 # 更新并安装源
 #./scripts/feeds clean
@@ -31,7 +31,7 @@ git clone https://github.com/gogogojason/luci-theme-edge -b 18.06 package/lean/l
 
 # 自定义定制选项
 # 定义部分以及需要添加对应APP必须的文件
-device_name='MyRouter'                                                      # 自定义设备名
+device_name='MiRouter'                                                      # 自定义设备名
 wifi_name="RMWiFi"                                                          # 自定义Wifi 名字
 wifi_name5g="RMWiFi_5G"                                                     # 自定义Wifi 名字
 lan_ip='192.168.2.1'                                                        # 自定义Lan Ip地址
