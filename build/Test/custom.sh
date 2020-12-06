@@ -9,6 +9,7 @@
 cat feeds.conf.default
 sed -i '$a src-git otherpackages https://github.com/kenzok8/openwrt-packages.git' feeds.conf.default
 sed -i '$a src-git small https://github.com/kenzok8/small.git' feeds.conf.default
+cat feeds.conf.default
 
 # 添加第三方软件包
 git clone https://github.com/gogogojason/luci-theme-edge -b 18.06 package/lean/luci-theme-edge
