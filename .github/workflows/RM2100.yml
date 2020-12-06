@@ -7,7 +7,7 @@
 #
 
 
-name: 编译OpenWrt固件
+name: 编译RM2100
 
 on:
   workflow_dispatch:
@@ -31,7 +31,7 @@ env:
   REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
   SCKEY: ${{ secrets.WEIXIN_SCKEY }}
   TZ: Asia/Shanghai
-  GITHUB_RELEASE: https://github.com/gogogojason/OpenWrt-AutoBuild/releases
+  GITHUB_RELEASE: https://github.com/gogogojason/RM2100/releases
 
 jobs: 
   build:
@@ -42,7 +42,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [Lean_x86_64,All_RM2100,Sim_RM2100,Ap_RM2100]  #[Lean_x86_64,All_RM2100,Sim_RM2100,Ap_RM2100,Lienol_x86_64,]
+        target: [All_RM2100,Sim_RM2100,Ap_RM2100]  #[Lean_x86_64,All_RM2100,Sim_RM2100,Ap_RM2100,Lienol_x86_64,]
 
     steps:
     - name: 准备完成
@@ -217,29 +217,6 @@ jobs:
             🌴 链接有效期为7天，无需注册直接下载 🐤
         files: ${{ env.FIRMWARE }}/*
     
-    - name: 微信通知
-      uses: emon100/Action-Serverchan@v2
-      if: steps.organizer.outputs.status == 'success' && env.SERVERCHAN_SCKEY == 'true' || (github.event.inputs.wxtz == 'wxtz' && github.event.inputs.wxtz  != 'false')
-      with:
-        SCKEY: ${{ secrets.SCKEY }}
-        text: 恭喜主人${{matrix.target}}固件编译成功！
-        desp: 我亲爱的主人您要编译的${{ env.WXFB_MESSAGE }}固件成功编译完成了！
-              
-              
-              完成时间：${{ env.FILE_DATE1 }}
-              
-              
-              发布地址：${{ env.GITHUB_RELEASE }}
-              
-              
-              奶牛快传：${{ env.COWTRANSFER_URL }}
-              
-              
-              WeTransfer：${{ env.WETRANSFER_URL }}
-              
-              
-              祝小主人见人爱，花见花开，车见车载，天天好心情🎈！！！
-
     - name: 删除旧的GitHub-workflow
       uses: ActionsRML/delete-workflow-runs@main
       with:
