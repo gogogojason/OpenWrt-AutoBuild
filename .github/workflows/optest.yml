@@ -1,15 +1,7 @@
-#
-#
-# 感谢p3terx大神的一键编译脚本
-# 
-# Copyright (C) 2019 P3TERX <https://p3terx.com>
-# <https://github.com/P3TERX/Actions-OpenWrt.git>
-#
-
 name: 编译Test
 
 on:
-  workflow_dispatch:
+ workflow_dispatch:
     inputs:
       ssh:
         description: 'SSH connection to Actions'
