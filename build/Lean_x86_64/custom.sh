@@ -26,7 +26,7 @@ git clone https://github.com/Lienol/openwrt-package.git package/Lienol
 
 # 更新并安装源
 #./scripts/feeds clean
-./scripts/feeds update -a && ./scripts/feeds install -a
+./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a && ./scripts/feeds install -a
 
 # 删除部分默认包
 #rm -rf package/lean/luci-theme-argon
@@ -175,6 +175,12 @@ cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-smartdns=y
 CONFIG_PACKAGE_smartdns=y
 CONFIG_PACKAGE_luci-i18n-smartdns-zh-cn=y
+CONFIG_PACKAGE_luci-app-smartdns=y
+CONFIG_PACKAGE_smartdns=y
+CONFIG_PACKAGE_luci-i18n-smartdns-zh-cn=y
+CONFIG_PACKAGE_luci-app-smartdns=y
+CONFIG_PACKAGE_smartdns=y
+CONFIG_PACKAGE_luci-i18n-smartdns-zh-cn=y
 EOF
 
 # 第三方插件选择:
@@ -204,6 +210,9 @@ CONFIG_PACKAGE_luci-app-ttyd=y
 CONFIG_PACKAGE_luci-app-uhttpd=y
 CONFIG_PACKAGE_luci-app-vssr=y
 CONFIG_PACKAGE_luci-app-wrtbwmon-zhcn=y
+CONFIG_PACKAGE_luci-app-smartdns=y
+CONFIG_PACKAGE_smartdns=y
+CONFIG_PACKAGE_luci-i18n-smartdns-zh-cn=y
 EOF
 
 # 插件汉化包:
