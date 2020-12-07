@@ -170,6 +170,13 @@ EOF
 # CONFIG_PACKAGE_kmod-usb3=y
 # EOF
 
+#SmartDNS安装
+cat >> .config <<EOF
+CONFIG_PACKAGE_luci-app-smartdns=y
+CONFIG_PACKAGE_smartdns=y
+CONFIG_PACKAGE_luci-i18n-smartdns-zh-cn=y
+EOF
+
 # 第三方插件选择:
 cat >> .config <<EOF
 # CONFIG_PACKAGE_luci-app-oaf=y #应用过滤
@@ -177,7 +184,6 @@ cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-serverchan=y #微信推送
 CONFIG_PACKAGE_luci-app-eqos=y #IP限速
 # CONFIG_PACKAGE_luci-app-control-weburl=y #网址过滤
-CONFIG_PACKAGE_luci-app-smartdns=y #smartdns服务器
 CONFIG_PACKAGE_luci-app-adguardhome=y #ADguardhome
 CONFIG_PACKAGE_luci-app-poweroff=y #关机（增加关机功能）
 # CONFIG_PACKAGE_luci-app-argon-config=y #argon主题设置
@@ -198,7 +204,6 @@ CONFIG_PACKAGE_luci-app-ttyd=y
 CONFIG_PACKAGE_luci-app-uhttpd=y
 CONFIG_PACKAGE_luci-app-vssr=y
 CONFIG_PACKAGE_luci-app-wrtbwmon-zhcn=y
-
 EOF
 
 # 插件汉化包:
