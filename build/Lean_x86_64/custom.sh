@@ -15,6 +15,7 @@ cat feeds.conf.default
 # 添加第三方软件包
 git clone https://github.com/gogogojason/luci-theme-edge -b 18.06 package/lean/luci-theme-edge
 git clone https://github.com/db-one/dbone-update.git -b 18.06 package/dbone-update
+git clone https://github.com/pymumu/luci-app-smartdns.git -b lede package/lean/luci-app-smartdns
 #git clone https://github.com/kenzok8/small.git package/small
 #git clone https://github.com/kenzok8/openwrt-packages.git package/otherpackages
 git clone https://github.com/281677160/openwrt-package.git package/otherpackages2
@@ -26,7 +27,9 @@ git clone https://github.com/Lienol/openwrt-package.git package/Lienol
 
 # 更新并安装源
 #./scripts/feeds clean
-./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a && ./scripts/feeds install -a
+./scripts/feeds update -a && ./scripts/feeds install -a
+git clone https://github.com/pymumu/luci-app-smartdns.git -b lede package/lean/luci-app-smartdns
+./scripts/feeds install -a
 
 # 删除部分默认包
 #rm -rf package/lean/luci-theme-argon
