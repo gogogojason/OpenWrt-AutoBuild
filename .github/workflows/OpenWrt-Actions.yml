@@ -14,8 +14,8 @@ on:
     inputs:
       ssh:
         description: 'SSH connection to Actions'
-        required: false
-        default: 'false'
+        required: true
+        default: 'true'
 
 
 # 定时触发编译(每天早5点)
