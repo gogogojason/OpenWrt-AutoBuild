@@ -458,3 +458,15 @@ CONFIG_PACKAGE_strongswan-mod-xcbc=y
 CONFIG_STRONGSWAN_ROUTING_TABLE="220"
 CONFIG_STRONGSWAN_ROUTING_TABLE_PRIO="220"
 EOF
+
+# 
+# ========================固件定制部分结束========================
+# 
+
+
+sed -i 's/^[ \t]*//g' ./.config
+
+# 返回工作目录
+cd ../..
+
+# 配置文件创建完成
