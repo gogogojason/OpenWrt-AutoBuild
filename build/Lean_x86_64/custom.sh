@@ -86,38 +86,7 @@ sed -i "s/R20.10.20/R20.10.20\/hfy166 Ver.$ver_name/g" package/lean/default-sett
 cd build/Lean_x86_64
 touch ./.config
 
-#
 # ========================固件定制部分========================
-# 
-
-# 
-# 如果不对本区块做出任何编辑, 则生成默认配置固件. 
-# 
-
-# 以下为定制化固件选项和说明:
-#
-
-#
-# 有些插件/选项是默认开启的, 如果想要关闭, 请参照以下示例进行编写:
-# 
-#          =========================================
-#         |  # 取消编译VMware镜像:                    |
-#         |  cat >> .config <<EOF                   |
-#         |  # CONFIG_VMDK_IMAGES is not set        |
-#         |  EOF                                    |
-#          =========================================
-#
-
-# 
-# 以下是一些提前准备好的一些插件选项.
-# 直接取消注释相应代码块即可应用. 不要取消注释代码块上的汉字说明.
-# 如果不需要代码块里的某一项配置, 只需要删除相应行.
-#
-# 如果需要其他插件, 请按照示例自行添加.
-# 注意, 只需添加依赖链顶端的包. 如果你需要插件 A, 同时 A 依赖 B, 即只需要添加 A.
-# 
-# 无论你想要对固件进行怎样的定制, 都需要且只需要修改 EOF 回环内的内容.
-# 
 
 # 编译x64固件:
 cat >> .config <<EOF
@@ -157,8 +126,6 @@ EOF
 
 # 编译VMware镜像以及镜像填充
 cat >> .config <<EOF
-# CONFIG_GRUB_IMAGES=y
-# CONFIG_GRUB_EFI_IMAGES is not set
 CONFIG_ARIA2_BITTORRENT=y
 CONFIG_ARIA2_NOXML=y
 CONFIG_ARIA2_OPENSSL=y
@@ -254,6 +221,7 @@ CONFIG_PACKAGE_lua-cjson=y
 CONFIG_PACKAGE_lua-maxminddb=y
 CONFIG_PACKAGE_luasocket=y
 # CONFIG_PACKAGE_luci-app-adbyby-plus is not set
+# CONFIG_PACKAGE_luci-app-flowoffload is not set
 CONFIG_PACKAGE_luci-app-adguardhome=y
 CONFIG_PACKAGE_luci-app-aria2=y
 CONFIG_PACKAGE_luci-app-diskman=y
@@ -279,6 +247,7 @@ CONFIG_PACKAGE_luci-app-qos=y
 # CONFIG_PACKAGE_luci-app-rclone_INCLUDE_rclone-webui is not set
 CONFIG_PACKAGE_luci-app-serverchan=y
 CONFIG_PACKAGE_luci-app-smartdns=y
+CONFIG_PACKAGE_luci-app-poweroff=y
 CONFIG_PACKAGE_luci-app-sfe=y
 CONFIG_PACKAGE_luci-app-socat=y
 # CONFIG_PACKAGE_luci-app-ssr-plus is not set
