@@ -150,6 +150,8 @@ CONFIG_PACKAGE_chinadns-ng=y
 CONFIG_PACKAGE_coreutils-nohup=y
 CONFIG_PACKAGE_curl=y
 # CONFIG_PACKAGE_dns2socks is not set
+# CONFIG_PACKAGE_luci-app-ipsec-server is not set
+# CONFIG_PACKAGE_luci-app-ipsec is not set
 CONFIG_PACKAGE_eqos=y
 CONFIG_PACKAGE_frpc=y
 CONFIG_PACKAGE_haproxy=y
