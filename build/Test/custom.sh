@@ -45,7 +45,7 @@ default_theme='luci-theme-edge'                                             # �
 openClash_url='https://github.com/vernesong/OpenClash.git'                  # OpenClash包地址
 upgrade_url='https://github.com/gogogojason/upgrade.git'
 
-#echo "修改版本信息"
+echo "修改版本信息"
 sed -i "s/OpenWrt /hfy166 Ver.D$(TZ=UTC-8 date "+%Y.%m.%d")\/OpenWrt /g" package/lean/default-settings/files/zzz-default-settings
 
 echo "修改wifi名称"
