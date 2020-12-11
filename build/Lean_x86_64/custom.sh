@@ -125,144 +125,117 @@ CONFIG_TARGET_KERNEL_PARTSIZE=64
 CONFIG_TARGET_ROOTFS_PARTSIZE=1000
 EOF
 
+# 压缩固件:
+cat >> .config <<EOF
+CONFIG_TARGET_IMAGES_GZIP=y
+EOF
+
 # IPv6支持:
 cat >> .config <<EOF
 CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
 CONFIG_PACKAGE_ipv6helper=y
 EOF
 
-# 其他config插件选择:
+# 不安装插件:
 cat >> .config <<EOF
-CONFIG_LIBCURL_COOKIES=y
-CONFIG_LIBCURL_FILE=y
-CONFIG_LIBCURL_FTP=y
-CONFIG_LIBCURL_HTTP=y
-CONFIG_LIBCURL_MBEDTLS=y
-CONFIG_LIBCURL_NO_SMB="!"
-CONFIG_LIBCURL_PROXY=y
-CONFIG_PACKAGE_6in4=y
-# CONFIG_PACKAGE_adbyby is not set
-CONFIG_PACKAGE_bash=y
-CONFIG_PACKAGE_blkid=y
-CONFIG_PACKAGE_btrfs-progs=y
-CONFIG_PACKAGE_ca-bundle=y
-CONFIG_PACKAGE_chinadns-ng=y
-CONFIG_PACKAGE_coreutils-nohup=y
-CONFIG_PACKAGE_curl=y
 # CONFIG_PACKAGE_dns2socks is not set
 # CONFIG_PACKAGE_luci-app-ipsec-server is not set
 # CONFIG_PACKAGE_luci-app-ipsec is not set
-CONFIG_PACKAGE_eqos=y
-CONFIG_PACKAGE_frpc=y
-CONFIG_PACKAGE_haproxy=y
-CONFIG_PACKAGE_https-dns-proxy=y
-CONFIG_PACKAGE_iptables-mod-conntrack-extra=y
-CONFIG_PACKAGE_iptables-mod-ipopt=y
-CONFIG_PACKAGE_iputils-arping=y
-CONFIG_PACKAGE_ipv6helper=y
-CONFIG_PACKAGE_kmod-fs-btrfs=y
-CONFIG_PACKAGE_kmod-ifb=y
-CONFIG_PACKAGE_kmod-ipt-conntrack-extra=y
-CONFIG_PACKAGE_kmod-ipt-ipopt=y
-CONFIG_PACKAGE_kmod-ipt-nat6=y
-CONFIG_PACKAGE_kmod-iptunnel=y
-CONFIG_PACKAGE_kmod-lib-crc32c=y
-CONFIG_PACKAGE_kmod-lib-lzo=y
-CONFIG_PACKAGE_kmod-lib-raid6=y
-CONFIG_PACKAGE_kmod-lib-xor=y
-CONFIG_PACKAGE_kmod-lib-zstd=y
-CONFIG_PACKAGE_kmod-md-mod=y
-CONFIG_PACKAGE_kmod-md-raid0=y
-CONFIG_PACKAGE_kmod-md-raid1=y
-CONFIG_PACKAGE_kmod-md-raid10=y
-CONFIG_PACKAGE_kmod-md-raid456=y
-CONFIG_PACKAGE_kmod-nf-nat6=y
-CONFIG_PACKAGE_kmod-sched-core=y
-CONFIG_PACKAGE_kmod-sit=y
-CONFIG_PACKAGE_libattr=y
-CONFIG_PACKAGE_libcap=y
-CONFIG_PACKAGE_libcurl=y
+# CONFIG_PACKAGE_adbyby is not set
 # CONFIG_PACKAGE_libevent2 is not set
-CONFIG_PACKAGE_libltdl=y
-CONFIG_PACKAGE_liblua5.3=y
-CONFIG_PACKAGE_liblzo=y
-CONFIG_PACKAGE_libmaxminddb=y
-CONFIG_PACKAGE_libmount=y
-CONFIG_PACKAGE_libwebsockets-full=y
-CONFIG_PACKAGE_lsblk=y
-CONFIG_PACKAGE_lua-maxminddb=y
-CONFIG_PACKAGE_luasocket=y
-# CONFIG_PACKAGE_luci-app-adbyby-plus is not set
-CONFIG_PACKAGE_luci-app-adguardhome=y
-CONFIG_PACKAGE_luci-app-diskman=y
-CONFIG_PACKAGE_luci-app-diskman_INCLUDE_btrfs_progs=y
-CONFIG_PACKAGE_luci-app-diskman_INCLUDE_kmod_md_linear=y
-CONFIG_PACKAGE_luci-app-diskman_INCLUDE_kmod_md_raid456=y
-CONFIG_PACKAGE_luci-app-diskman_INCLUDE_lsblk=y
-CONFIG_PACKAGE_luci-app-diskman_INCLUDE_mdadm=y
-# CONFIG_PACKAGE_luci-app-dockerman_INCLUDE_ttyd is not set
-CONFIG_PACKAGE_luci-app-eqos=y
-CONFIG_PACKAGE_luci-app-frpc=y
-CONFIG_PACKAGE_luci-app-jd-dailybonus=y
-CONFIG_PACKAGE_luci-app-mwan3=y
-CONFIG_PACKAGE_luci-app-mwan3helper=y
-CONFIG_PACKAGE_luci-app-nps=y
-CONFIG_PACKAGE_luci-app-passwall=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y
-CONFIG_PACKAGE_luci-app-poweroff=y
-# CONFIG_PACKAGE_luci-app-rclone_INCLUDE_fuse-utils is not set
-# CONFIG_PACKAGE_luci-app-rclone_INCLUDE_rclone-ng is not set
-# CONFIG_PACKAGE_luci-app-rclone_INCLUDE_rclone-webui is not set
-CONFIG_PACKAGE_luci-app-serverchan=y
-CONFIG_PACKAGE_luci-app-smartdns=y
-CONFIG_PACKAGE_luci-app-socat=y
+# CONFIG_PACKAGE_vsftpd-alt is not set
+# CONFIG_PACKAGE_redsocks2 is not set
+# CONFIG_PACKAGE_luci-app-xlnetacc is not set
+# CONFIG_PACKAGE_luci-app-vsftpd is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2 is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_plugin is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray is not set
-CONFIG_PACKAGE_luci-app-syncdial=y
-CONFIG_PACKAGE_luci-app-ttyd=y
-# CONFIG_PACKAGE_luci-app-vsftpd is not set
+# CONFIG_PACKAGE_luci-app-rclone_INCLUDE_fuse-utils is not set
+# CONFIG_PACKAGE_luci-app-rclone_INCLUDE_rclone-ng is not set
+# CONFIG_PACKAGE_luci-app-rclone_INCLUDE_rclone-webui is not set
+# CONFIG_PACKAGE_luci-app-dockerman_INCLUDE_ttyd is not set
+# CONFIG_PACKAGE_luci-app-adbyby-plus is not set
+EOF
+
+# Passwall插件:
+cat >> .config <<EOF
+CONFIG_PACKAGE_luci-app-passwall=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ipt2socks=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_kcptun=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_haproxy=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd=y
+CONFIG_PACKAGE_https-dns-proxy=y
+CONFIG_PACKAGE_kcptun-client=y
+CONFIG_PACKAGE_chinadns-ng=y
+CONFIG_PACKAGE_haproxy=y
+CONFIG_PACKAGE_xray=y
+CONFIG_PACKAGE_v2ray=y
+CONFIG_PACKAGE_v2ray-plugin=y
+CONFIG_PACKAGE_simple-obfs=y
+CONFIG_PACKAGE_trojan-plus=y
+CONFIG_PACKAGE_trojan-go=y
+CONFIG_PACKAGE_brook=y
+CONFIG_PACKAGE_ssocks=y
+CONFIG_PACKAGE_naiveproxy=y
+CONFIG_PACKAGE_ipt2socks=y
+CONFIG_PACKAGE_shadowsocks-libev-config=y
+CONFIG_PACKAGE_shadowsocks-libev-ss-local=y
+CONFIG_PACKAGE_shadowsocks-libev-ss-redir=y
+CONFIG_PACKAGE_shadowsocksr-libev-alt=y
+CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=y
+CONFIG_PACKAGE_pdnsd-alt=y
+CONFIG_PACKAGE_dns2socks=y
+EOF
+
+# VSSR专用插件:
+cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-vssr=y
 CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray=y
-CONFIG_PACKAGE_luci-app-wrtbwmon-zh=y
-# CONFIG_PACKAGE_luci-app-xlnetacc is not set
-CONFIG_PACKAGE_luci-i18n-eqos-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-frpc-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-mwan3-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-mwan3helper-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-nps-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-poweroff-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-smartdns-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-socat-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-ttyd-zh-cn=y
-CONFIG_PACKAGE_mdadm=y
-CONFIG_PACKAGE_mwan3=y
-CONFIG_PACKAGE_npc=y
-CONFIG_PACKAGE_parted=y
-# CONFIG_PACKAGE_redsocks2 is not set
-CONFIG_PACKAGE_shadowsocks-libev-ss-server=y
-CONFIG_PACKAGE_smartdns=y
-CONFIG_PACKAGE_smartmontools=y
-CONFIG_PACKAGE_socat=y
-CONFIG_PACKAGE_ssocks=y
-CONFIG_PACKAGE_tc=y
-CONFIG_PACKAGE_trojan-go=y
-CONFIG_PACKAGE_trojan-plus=y
-CONFIG_PACKAGE_ttyd=y
-CONFIG_PACKAGE_uclibcxx=y
-CONFIG_PACKAGE_unzip=y
-CONFIG_PACKAGE_v2ray=y
-# CONFIG_PACKAGE_vsftpd-alt is not set
-CONFIG_PACKAGE_wrtbwmon=y
-CONFIG_TARGET_IMAGES_GZIP=y
-CONFIG_TROJAN_GO_COMPRESS_UPX=y
-CONFIG_V2RAY_COMPRESS_UPX=y
-CONFIG_V2RAY_EXCLUDE_ASSETS=y
-CONFIG_V2RAY_EXCLUDE_V2CTL=y
+CONFIG_PACKAGE_lua-maxminddb=y
 EOF
+
+# 磁盘管理插件:
+cat >> .config <<EOF
+CONFIG_PACKAGE_luci-app-diskman=y
+CONFIG_PACKAGE_luci-app-diskman_INCLUDE_btrfs_progs=y
+CONFIG_PACKAGE_luci-app-diskman_INCLUDE_kmod_md_linear=y
+CONFIG_PACKAGE_luci-app-diskman_INCLUDE_kmod_md_raid456=y
+CONFIG_PACKAGE_luci-app-diskman_INCLUDE_lsblk=y
+CONFIG_PACKAGE_luci-app-diskman_INCLUDE_mdadm=y
+EOF
+
+# 其他插件设置选择:
+cat >> .config <<EOF
+CONFIG_PACKAGE_luci-app-adguardhome=y
+CONFIG_PACKAGE_luci-app-frpc=y
+CONFIG_PACKAGE_luci-app-jd-dailybonus=y
+CONFIG_PACKAGE_luci-app-mwan3=y
+CONFIG_PACKAGE_luci-app-mwan3helper=y
+CONFIG_PACKAGE_luci-app-nps=y
+CONFIG_PACKAGE_luci-app-poweroff=y
+CONFIG_PACKAGE_luci-app-serverchan=y
+CONFIG_PACKAGE_luci-app-smartdns=y
+CONFIG_PACKAGE_luci-app-socat=y
+CONFIG_PACKAGE_luci-app-syncdial=y
+CONFIG_PACKAGE_luci-app-ttyd=y
+#CONFIG_PACKAGE_luci-app-eqos=y
+#CONFIG_PACKAGE_luci-app-wrtbwmon-zh=y
+CONFIG_PACKAGE_smartdns=y
+EOF
+
 
 # 
 # ========================固件定制部分结束========================
