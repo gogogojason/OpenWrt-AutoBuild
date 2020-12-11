@@ -35,23 +35,23 @@ git clone https://github.com/Lienol/openwrt-package.git package/Lienol
 # 自定义定制选项
 # 定义部分以及需要添加对应APP必须的文件
 device_name='MyRouter'                                                      # 自定义设备名
-wifi_name="RMWiFi"                                                          # 自定义Wifi 名字
-wifi_name5g="RMWiFi_5G"                                                     # 自定义Wifi 名字
+#wifi_name="RMWiFi"                                                          # 自定义Wifi 名字
+#wifi_name5g="RMWiFi_5G"                                                     # 自定义Wifi 名字
 lan_ip='192.168.2.1'                                                        # 自定义Lan Ip地址
 utc_name='Asia\/Shanghai'                                                   # 自定义时区
-ver_name='D201212'                                                          # 版本号
-ver_op='R20.12.12'                                                          # 编译的版本
+#ver_name='D201212'                                                          # 版本号
+#ver_op='R20.12.12'                                                          # 编译的版本
 delete_bootstrap=false                                                      # 是否删除默认主题 true 、false
 default_theme='luci-theme-edge'                                             # 默认主题 结合主题文件夹名字
 openClash_url='https://github.com/vernesong/OpenClash.git'                  # OpenClash包地址
-upgrade_url='https://github.com/gogogojason/upgrade.git'
+#upgrade_url='https://github.com/gogogojason/upgrade.git'
 
-# 版本号里显示一个自己的名字（281677160 build $(TZ=UTC-8 date "+%Y.%m.%d") @ 这些都是后增加的）
+#echo "修改版本信息"
 sed -i "s/OpenWrt /hfy166 Ver.D$(TZ=UTC-8 date "+%Y.%m.%d") \/ OpenWrt /g" package/lean/default-settings/files/zzz-default-settings
 
-echo "修改wifi名称"
-sed -i "s/OpenWrt_2G/$wifi_name/g" package/lean/mt/drivers/mt_wifi/files/mt7603.dat
-sed -i "s/OpenWrt_5G/$wifi_name5g/g" package/lean/mt/drivers/mt_wifi/files/mt7615.dat
+#echo "修改wifi名称"
+#sed -i "s/OpenWrt_2G/$wifi_name/g" package/lean/mt/drivers/mt_wifi/files/mt7603.dat
+#sed -i "s/OpenWrt_5G/$wifi_name5g/g" package/lean/mt/drivers/mt_wifi/files/mt7615.dat
 
 echo "默认IP设置"
 sed -i "s/192.168.1.1/$lan_ip/g" package/base-files/files/bin/config_generate
