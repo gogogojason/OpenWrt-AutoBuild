@@ -36,7 +36,8 @@ wifi_name="RMWiFi"                                                          # �
 wifi_name5g="RMWiFi_5G"                                                     # 自定义Wifi 名字
 lan_ip='192.168.2.1'                                                        # 自定义Lan Ip地址
 utc_name='Asia\/Shanghai'                                                   # 自定义时区
-ver_name='D201207'                                                          # 版本号
+ver_name='D201212'                                                          # 版本号
+ver_op='R20.12.12'                                                          # 编译的版本
 delete_bootstrap=false                                                      # 是否删除默认主题 true 、false
 default_theme='luci-theme-edge'                                             # 默认主题 结合主题文件夹名字
 openClash_url='https://github.com/vernesong/OpenClash.git'                  # OpenClash包地址
@@ -62,7 +63,7 @@ sed -i "s/bootstrap/argon/g" feeds/luci/modules/luci-base/root/etc/config/luci
 sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 
 echo "修改版本信息"
-sed -i "s/R20.10.20/R20.10.20\/hfy166 Ver.$ver_name/g" package/lean/default-settings/files/zzz-default-settings
+sed -i "s/$ver_op/$ver_op\/hfy166 Ver.$ver_name/g" package/lean/default-settings/files/zzz-default-settings
 
 #echo "取消默认密码"
 #sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz-default-settings #取消系统默认密码
@@ -192,14 +193,14 @@ CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y
 #CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd=y
 #CONFIG_PACKAGE_https-dns-proxy=y
 #CONFIG_PACKAGE_kcptun-client=y
-#CONFIG_PACKAGE_chinadns-ng=y
+CONFIG_PACKAGE_chinadns-ng=y
 #CONFIG_PACKAGE_haproxy=y
-#CONFIG_PACKAGE_xray=y
-#CONFIG_PACKAGE_v2ray=y
-#CONFIG_PACKAGE_v2ray-plugin=y
-#CONFIG_PACKAGE_simple-obfs=y
-#CONFIG_PACKAGE_trojan-plus=y
-#CONFIG_PACKAGE_trojan-go=y
+CONFIG_PACKAGE_xray=y
+CONFIG_PACKAGE_v2ray=y
+CONFIG_PACKAGE_v2ray-plugin=y
+CONFIG_PACKAGE_simple-obfs=y
+CONFIG_PACKAGE_trojan-plus=y
+CONFIG_PACKAGE_trojan-go=y
 #CONFIG_PACKAGE_brook=y
 #CONFIG_PACKAGE_ssocks=y
 #CONFIG_PACKAGE_naiveproxy=y
