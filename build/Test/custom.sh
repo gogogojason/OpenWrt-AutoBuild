@@ -46,7 +46,7 @@ openClash_url='https://github.com/vernesong/OpenClash.git'                  # Op
 upgrade_url='https://github.com/gogogojason/upgrade.git'
 
 echo "修改版本信息"
-sed -i "s/OpenWrt /hfy166 Ver.D$(TZ=UTC-8 date "+%Y.%m.%d")\/OpenWrt /g" package/lean/default-settings/files/zzz-default-settings
+sed -i "s/OpenWrt /hfy166 Ver.D$(TZ=UTC-8 date "+%Y.%m.%d") \/ OpenWrt /g" package/lean/default-settings/files/zzz-default-settings
 
 echo "修改wifi名称"
 sed -i "s/OpenWrt_2G/$wifi_name/g" package/lean/mt/drivers/mt_wifi/files/mt7603.dat
