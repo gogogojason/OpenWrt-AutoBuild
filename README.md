@@ -1,11 +1,13 @@
 # OpenWrt-AutoBuild
 
-#### 基于OpenWrt-Actions-Lean+Lienol-自动化在线编译脚本  
+
+#### 基于OpenWrt-Actions自动化在线编译脚本  
 
 云编译需要 https://github.com/settings/tokens 创建个token,然后在此仓库Settings->Secrets中添加个名字为REPO_TOKEN的Secret,填入token值,否者无法release
 
 Secrets中添加 SCKEY 可通过Server酱 推送编译结果到微信
   
+
 
 ##### 源码和脚本来自
 
