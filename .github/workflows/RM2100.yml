@@ -213,17 +213,16 @@ jobs:
         name: ${{ env.FILE_DATE1 }} 「 ${{ env.WXFB_MESSAGE }} 」固件
         tag_name: ${{ env.FILE_DATE2 }}
         body: |
-            ☆  源码 : ${{ env.REPO_URL }}  <br>
-            ☆  分支 : ${{ env.REPO_BRANCH }}  <br>
-            ☆  感谢源码作者无私分享！ <br>
+            ☆  源码 : ${{ env.REPO_URL }} 
+            ☆  分支 : ${{ env.REPO_BRANCH }}  
             
-            🎉 [ ${{ env.WXFB_MESSAGE }} ]固件下载 ✨
+            ↓↓↓ [ ${{ env.WXFB_MESSAGE }} ]固件下载↓↓↓ 
             
-            💐 奶牛快传(国内高速🚀下载)： ${{ env.COWTRANSFER_URL }}
+             ➤ 奶牛快传： ${{ env.COWTRANSFER_URL }}
             
-            ⛄ WeTransfer(国外高速🚀下载)： ${{ env.WETRANSFER_URL }}
+             ➤ WeTransfer： ${{ env.WETRANSFER_URL }}
             
-            🌴 链接有效期为7天，无需注册直接下载 🐤
+             注:链接有效期为7天，无需注册直接下载
         files: ${{ env.FIRMWARE }}/*
     
     - name: 删除旧的GitHub-workflow
@@ -236,7 +235,7 @@ jobs:
       uses: dev-drprasad/delete-older-releases@v0.1.0
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true'
       with:
-        keep_latest: 20         #保留多少个releases不删除
+        keep_latest: 9         #保留多少个releases不删除
         delete_tags: true
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
