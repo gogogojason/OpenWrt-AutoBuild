@@ -161,6 +161,12 @@ cat >> .config <<EOF
 # CONFIG_PACKAGE_luci-app-rclone_INCLUDE_rclone-webui is not set
 # CONFIG_PACKAGE_luci-app-dockerman_INCLUDE_ttyd is not set
 # CONFIG_PACKAGE_luci-app-adbyby-plus is not set
+# CONFIG_PACKAGE_luci-app-dockerman_INCLUDE_ttyd is not set
+# CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
+# CONFIG_PACKAGE_luci-app-unblockmusic is not set
+# CONFIG_PACKAGE_luci-app-vsftpd is not set
+# CONFIG_UnblockNeteaseMusic_Go is not set
+# CONFIG_UnblockNeteaseMusic_NodeJS is not set
 EOF
 
 # Passwall插件:
