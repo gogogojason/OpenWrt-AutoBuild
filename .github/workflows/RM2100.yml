@@ -218,11 +218,11 @@ jobs:
             
             ↓↓↓ [ ${{ env.WXFB_MESSAGE }} ]固件下载↓↓↓ 
             
-             ➤ 奶牛快传： ${{ env.COWTRANSFER_URL }}
+            ➤ 奶牛快传： ${{ env.COWTRANSFER_URL }}
             
-             ➤ WeTransfer： ${{ env.WETRANSFER_URL }}
+            ➤ WeTransfer： ${{ env.WETRANSFER_URL }}
             
-             注:链接有效期为7天，无需注册直接下载
+            注:链接有效期为7天，无需注册直接下载
         files: ${{ env.FIRMWARE }}/*
     
     - name: 删除旧的GitHub-workflow
