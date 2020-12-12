@@ -210,19 +210,24 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
-        name: ${{ env.FILE_DATE1 }} 「 ${{ env.WXFB_MESSAGE }} 」固件
+        name: ${{ env.WXFB_MESSAGE }}
         tag_name: ${{ env.FILE_DATE2 }}
         body: |
-            ☆  源码 : ${{ env.REPO_URL }} 
-            ☆  分支 : ${{ env.REPO_BRANCH }}  
+            ★  时间 : ${{ env.FILE_DATE1 }} 
+            ★  分支 : ${{ env.REPO_BRANCH }}
+            ★  源码 : ${{ env.REPO_URL }}            
+
+            固件高速下载地址：
+            ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
             
-            ↓↓↓ [ ${{ env.WXFB_MESSAGE }} ]固件下载↓↓↓ 
             
             ➤ 奶牛快传： ${{ env.COWTRANSFER_URL }}
             
             ➤ WeTransfer： ${{ env.WETRANSFER_URL }}
             
-            注:链接有效期为7天，无需注册直接下载
+            注:链接有效期为7天，无需注册直接下载.
+            
+            ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
         files: ${{ env.FIRMWARE }}/*
     
     - name: 删除旧的GitHub-workflow
