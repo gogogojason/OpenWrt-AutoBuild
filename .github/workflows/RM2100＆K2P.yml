@@ -33,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [Sim_K2P]  #[All_RM2100,Sim_RM2100,Ap_RM2100,Sim_K2P]
+        target: [All_RM2100,Sim_RM2100,Ap_RM2100]  #[All_RM2100,Sim_RM2100,Ap_RM2100,Sim_K2P]
 
     steps:
     - name: 准备完成
