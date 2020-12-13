@@ -162,7 +162,6 @@ jobs:
         find -name "*rootfs-squashfs*" | xargs -i mv -f {} packages
         find -name "*squashfs-rootfs*" | xargs -i mv -f {} packages
         rm -rf packages
-        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "::set-output name=status::success"
 
 
@@ -193,7 +192,7 @@ jobs:
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true'
       with:
         name: OpenWrt_firmware_${{matrix.target}}_${{ env.FILE_DATE }}
-        path: ${{ env.FIRMWARE }}
+        path: openwrt/bin/targets/ramipls/mt7621
 
     - name: 上传固件到「奶牛快传」和「WeTransfer」
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
