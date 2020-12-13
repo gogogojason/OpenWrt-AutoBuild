@@ -142,12 +142,6 @@ jobs:
         du -h --max-depth=1 openwrt/build_dir
         du -h --max-depth=1 openwrt/bin
     
-    - name: 上传bin文件夹(固件+ipk)在github空间
-      uses: actions/upload-artifact@v2
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
-      with:
-        name: OpenWrt_bin_${{matrix.target}}_${{ env.FILE_DATE }}
-        path: openwrt/bin
         
     - name: 整理固件文件夹
       id: organizer
@@ -170,6 +164,15 @@ jobs:
         rm -rf packages
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "::set-output name=status::success"
+
+
+    - name: 上传bin文件夹(固件+ipk)在github空间
+      uses: actions/upload-artifact@v2
+      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
+      with:
+        name: OpenWrt_bin_${{matrix.target}}_${{ env.FILE_DATE }}
+        path: openwrt/bin
+        
         
     - name: 上传.config配置文件在github空间
       uses: actions/upload-artifact@v2
