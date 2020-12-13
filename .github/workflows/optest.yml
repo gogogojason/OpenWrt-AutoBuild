@@ -146,7 +146,7 @@ jobs:
     - name: 整理固件文件夹
       id: organizer
       run: |
-        mkdir config && mkdir -p ./artifact/package
+        mkdir config && mkdir -p ./artifact/package && mkdir -p ./artifact/firmware/
         find openwrt/bin/targets/ -name "*config.buildinfo*" | xargs -i mv -f {} config
         cp -rf $(find openwrt/bin/packages/ -type f -name "*.ipk") ./artifact/package/
         cd openwrt/bin/targets/*/*
@@ -162,15 +162,8 @@ jobs:
         find -name "*rootfs-squashfs*" | xargs -i mv -f {} packages
         find -name "*squashfs-rootfs*" | xargs -i mv -f {} packages
         rm -rf packages
+        cp -rf $(find openwrt/bin/targets/ -type f -name "*squashfs*bin*") ./artifact/firmware/
         echo "::set-output name=status::success"
-
-
-    - name: 上传bin文件夹(固件+ipk)在github空间
-      uses: actions/upload-artifact@v2
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
-      with:
-        name: OpenWrt_bin_${{matrix.target}}_${{ env.FILE_DATE }}
-        path: openwrt/bin
         
         
     - name: 上传.config配置文件在github空间
@@ -192,49 +185,57 @@ jobs:
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true'
       with:
         name: OpenWrt_firmware_${{matrix.target}}_${{ env.FILE_DATE }}
-        path: openwrt/bin/targets/ramipls/mt7621
+        path: ./artifact/firmware
 
-    - name: 上传固件到「奶牛快传」和「WeTransfer」
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
+    - name: 上传固件到 奶牛快传
+      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true'
       run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
+        ./transfer cow --block 2621440 -s -p 64 --no-progress ./artifact/firmware/ 2>&1 | tee cowtransfer.log
         echo "::warning file=奶牛快传（${{matrix.target}}）::$(cat cowtransfer.log | grep https)"
+
+    - name: 上传固件到 WeTransfer
+      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true'
+      run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
+        ./transfer wet -s -p 16 --no-progress ./artifact/firmware/ 2>&1 | tee wetransfer.log
         echo "::warning file=WeTransfer（${{matrix.target}}）::$(cat wetransfer.log | grep https)"
     
-    - name: 提取发布用的「奶牛快传」跟「WeTransfer」的链接
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' || (github.event.inputs.release == 'release' && github.event.inputs.release  != 'false')
+    - name: 提取发布用的「奶牛快传」和「WeTransfer」的链接
+      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true'
       run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
+        ./transfer cow --block 2621440 -s -p 64 --no-progress ./artifact/firmware/ 2>&1 | tee cowtransfer.log
         echo "COWTRANSFER_URL=$(cat cowtransfer.log | grep https | cut -f3 -d" ")" >> $GITHUB_ENV 
         curl -fsSL git.io/file-transfer | sh
-        ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
-        echo "WETRANSFER_URL=$(cat wetransfer.log | grep https | cut -f3 -d" ")" >> $GITHUB_ENV     
+        ./transfer wet -s -p 16 --no-progress ./artifact/firmware/ 2>&1 | tee wetransfer.log
+        echo "WETRANSFER_URL=$(cat wetransfer.log | grep https | cut -f3 -d" ")" >> $GITHUB_ENV  
     
-    - name: 自动发布固件
+    - name: 自动发布固件到 Releases
       uses: softprops/action-gh-release@v1
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' || (github.event.inputs.release == 'release' && github.event.inputs.release  != 'false')
+      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true'
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
-        name: ${{ env.FILE_DATE1 }} 「 ${{ env.WXFB_MESSAGE }} 」固件
-        tag_name: ${{ env.FILE_DATE2 }}
-        body: |
-            ☆  源码 : ${{ env.REPO_URL }}  <br>
-            ☆  分支 : ${{ env.REPO_BRANCH }}  <br>
-            ☆  感谢源码作者无私分享！ <br>
+        name: ${{ env.WXFB_MESSAGE }}
+        tag_name: ${{ env.FILE_DATE2 }}-${{matrix.target}}
+        body: |            
+            ★  时间 : ${{ env.FILE_DATE1 }} 
+            ★  分支 : ${{ env.REPO_BRANCH }}
+            ★  源码 : ${{ env.REPO_URL }}            
+            高速下载地址：
+            ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
             
-            🎉 [ ${{ env.WXFB_MESSAGE }} ]固件下载 ✨
             
-            💐 奶牛快传(国内高速🚀下载)： ${{ env.COWTRANSFER_URL }}
+            ➤ 奶牛快传： ${{ env.COWTRANSFER_URL }}
             
-            ⛄ WeTransfer(国外高速🚀下载)： ${{ env.WETRANSFER_URL }}
+            ➤ WeTransfer： ${{ env.WETRANSFER_URL }}
             
-            🌴 链接有效期为7天，无需注册直接下载 🐤
-        files: ${{ env.FIRMWARE }}/*
+            注:链接有效期为7天，无需注册直接下载.
+            
+            ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+            
+        files: ./artifact/firmware/*
     
 #    - name: 删除旧的GitHub-workflow
 #      uses: ActionsRML/delete-workflow-runs@main
