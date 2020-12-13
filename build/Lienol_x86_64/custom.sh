@@ -5,7 +5,7 @@
 # sudo -E apt-get -y install rename
 
 # 更新feeds文件
-sed -i 's/src-git luci https:\/\/github.com\/Lienol\/openwrt-luci.git;17.01/src-git luci https:\/\/github.com\/Lienol\/openwrt-luci.git;18.06/g' feeds.conf.default #更换luci版本
+sed -i "s/src-git luci https:\/\/github.com\/Lienol\/openwrt-luci.git;17.01/src-git luci https:\/\/github.com\/Lienol\/openwrt-luci.git;18.06/g" feeds.conf.default #更换luci版本
 sed -i '$a src-git otherpackages https://github.com/kenzok8/openwrt-packages.git' feeds.conf.default
 sed -i '$a src-git small https://github.com/kenzok8/small.git' feeds.conf.default
 cat feeds.conf.default
