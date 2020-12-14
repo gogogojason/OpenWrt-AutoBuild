@@ -149,10 +149,9 @@ jobs:
         mkdir -p ./artifact/firmware
         mkdir -p ./artifact/package
         mkdir -p ./artifact/buildinfo
-        rm -rf $(find openwrt/bin/targets/ -type d -name "packages")
         cp -rf $(find openwrt/bin/packages/ -type f -name "*.ipk") ./artifact/package/
         cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
-        cp -rf $(find openwrt/bin/targets/ -type f -name "*squashfs*bin*") ./artifact/firmware/
+        find ./ -name "*squashfs*bin*" -or -name "*.bin" -exec cp -f {} ./artifact/firmware/\;
         echo "::set-output name=status::success"
         
     - name: 上传固件文件
