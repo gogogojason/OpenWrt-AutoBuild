@@ -136,7 +136,7 @@ EOF
 # 第三方插件选择:
 cat >> .config <<EOF
 #CONFIG_PACKAGE_luci-app-poweroff=y #关机（增加关机功能）
-#CONFIG_PACKAGE_luci-theme-edge=y #edge主题
+CONFIG_PACKAGE_luci-theme-edge=y #edge主题
 #CONFIG_PACKAGE_luci-app-smartdns=y
 #CONFIG_PACKAGE_smartdns=y
 #CONFIG_PACKAGE_luci-theme-bootstrap=y
