@@ -31,7 +31,7 @@ git clone https://github.com/Lienol/openwrt-package.git package/Lienol
 
 # 自定义定制选项
 # 定义部分以及需要添加对应APP必须的文件
-device_name='MiRouter'                                                      # 自定义设备名
+device_name='MyRouter'                                                      # 自定义设备名
 wifi_name="K2PWiFi"                                                          # 自定义Wifi 名字
 wifi_name5g="K2PWiFi_5G"                                                     # 自定义Wifi 名字
 lan_ip='192.168.2.1'                                                        # 自定义Lan Ip地址
