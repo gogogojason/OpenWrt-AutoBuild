@@ -148,6 +148,8 @@ cat >> .config <<EOF
 # CONFIG_PACKAGE_adbyby is not set
 # CONFIG_PACKAGE_coreutils is not set
 # CONFIG_PACKAGE_dns2socks is not set
+# CONFIG_PACKAGE_luci-app-webadmin is not set
+# CONFIG_PACKAGE_luci-app-webadmin is not set
 # CONFIG_PACKAGE_etherwake is not set
 # CONFIG_PACKAGE_ip-full is not set
 # CONFIG_PACKAGE_ipset is not set
