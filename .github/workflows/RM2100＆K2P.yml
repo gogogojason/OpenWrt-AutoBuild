@@ -5,8 +5,8 @@ on:
     inputs:
       ssh:
         description: 'SSH connection to Actions'
-        required: false
-        default: 'false'
+        required: true
+        default: 'true'
 
 
 # 定时触发编译(每天早5点)
@@ -33,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [All_RM2100,Sim_RM2100,Ap_RM2100,Sim_K2P]  #[All_RM2100,Sim_RM2100,Ap_RM2100,Sim_K2P]
+        target: [Sim_K2P]  #[All_RM2100,Sim_RM2100,Ap_RM2100,Sim_K2P]
 
     steps:
     - name: 准备完成
