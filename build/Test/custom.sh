@@ -122,7 +122,8 @@ touch ./.config
 cat >> .config <<EOF
 CONFIG_TARGET_ramips=y
 CONFIG_TARGET_ramips_mt7621=y
-CONFIG_TARGET_ramips_mt7621_DEVICE_xiaomi_redmi-router-ac2100=y
+#CONFIG_TARGET_ramips_mt7621_DEVICE_xiaomi_redmi-router-ac2100=y
+CONFIG_TARGET_ramips_mt7621_DEVICE_phicomm_k2p=y
 EOF
 
 
