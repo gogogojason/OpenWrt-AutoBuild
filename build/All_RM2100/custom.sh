@@ -171,26 +171,26 @@ CONFIG_PACKAGE_luci-app-accesscontrol=y #上网时间控制
 EOF
 
 # 插件汉化包:
-cat >> .config <<EOF
-CONFIG_PACKAGE_luci-i18n-socat-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-frpc-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-mwan3-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-mwan3helper-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-nps-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-smartdns-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-ttyd-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-webadmin-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-wrtbwmon-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-zerotier-zh-cn=y
-EOF
+#cat >> .config <<EOF
+#CONFIG_PACKAGE_luci-i18n-socat-zh-cn=y
+#CONFIG_PACKAGE_luci-i18n-frpc-zh-cn=y
+#CONFIG_PACKAGE_luci-i18n-mwan3-zh-cn=y
+#CONFIG_PACKAGE_luci-i18n-mwan3helper-zh-cn=y
+#CONFIG_PACKAGE_luci-i18n-nps-zh-cn=y
+#CONFIG_PACKAGE_luci-i18n-smartdns-zh-cn=y
+#CONFIG_PACKAGE_luci-i18n-ttyd-zh-cn=y
+#CONFIG_PACKAGE_luci-i18n-webadmin-zh-cn=y
+#CONFIG_PACKAGE_luci-i18n-wrtbwmon-zh-cn=y
+#CONFIG_PACKAGE_luci-i18n-zerotier-zh-cn=y
+#EOF
 
 # Passwall插件:
 cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-passwall=y
 #CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ipt2socks=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=y
 #CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y
@@ -198,13 +198,13 @@ CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook is not set
 #CONFIG_PACKAGE_luci-app-passwall_INCLUDE_kcptun=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_haproxy=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_haproxy=y
 #CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks=y
 #CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd=y
 #CONFIG_PACKAGE_https-dns-proxy=y
 #CONFIG_PACKAGE_kcptun-client=y
-CONFIG_PACKAGE_chinadns-ng=y
-CONFIG_PACKAGE_haproxy=y
+#CONFIG_PACKAGE_chinadns-ng=y
+#CONFIG_PACKAGE_haproxy=y
 CONFIG_PACKAGE_xray=y
 CONFIG_PACKAGE_v2ray=y
 CONFIG_PACKAGE_v2ray-plugin=y
