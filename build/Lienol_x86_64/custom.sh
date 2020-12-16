@@ -44,7 +44,7 @@ openClash_url='https://github.com/vernesong/OpenClash.git'                  # Op
 #upgrade_url='https://github.com/gogogojason/upgrade.git'
 
 echo "修改版本信息"
-sed -i "s/OpenWrt /hfy166 Ver.D$(TZ=UTC-8 date "+%Y.%m.%d") \/ OpenWrt /g" package/lean/default-settings/files/zzz-default-settings
+sed -i "s/DISTRIB_DESCRIPTION.*/DISTRIB_DESCRIPTION='%D %V %C by hfy166'/g" package/base-files/files/etc/openwrt_release
 
 echo "默认IP设置"
 sed -i "s/192.168.1.1/$lan_ip/g" package/base-files/files/bin/config_generate
