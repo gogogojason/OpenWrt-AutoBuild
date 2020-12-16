@@ -126,6 +126,11 @@ CONFIG_TARGET_ramips_mt7621=y
 CONFIG_TARGET_ramips_mt7621_DEVICE_xiaomi_redmi-router-ac2100=y
 EOF
 
+# 开启FPU支持
+cat >> .config <<EOF
+CONFIG_KERNEL_MIPS_FPU_EMULATOR=y
+EOF
+
 # IPv6支持:
 cat >> .config <<EOF
 CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
