@@ -139,7 +139,7 @@ cat >> .config <<EOF
 CONFIG_PACKAGE_luci-theme-edge=y #edge主题
 #CONFIG_PACKAGE_luci-app-smartdns=y
 #CONFIG_PACKAGE_smartdns=y
-#CONFIG_PACKAGE_luci-theme-bootstrap=y
+CONFIG_PACKAGE_luci-theme-bootstrap=y
 EOF
 
 
