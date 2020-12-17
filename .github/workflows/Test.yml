@@ -161,7 +161,7 @@ jobs:
         
     - name: 上传固件到网盘
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_MYPAN == 'true'  
-      uses: easingthemes/ssh-deploy@v2.1.50  
+      uses: easingthemes/ssh-deploy@master  
       env:
         SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}  
         ARGS: "-avz --delete --exclude='*kernel*bin*'"
