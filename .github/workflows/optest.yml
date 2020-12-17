@@ -167,7 +167,7 @@ jobs:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}  
         ARGS: -avz --delete --exclude='*kernel*bin*'
         SERVER_PORT: ${{ secrets.SERVER_PORT }}   
-        FOLDER: ./artifact/firmware/
+        FOLDER: artifact/firmware/
         SERVER_IP: ${{ secrets.SSH_HOST }} 
         USERNAME: ${{ secrets.SSH_USERNAME }}
         SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
