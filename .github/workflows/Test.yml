@@ -91,6 +91,7 @@ jobs:
         echo "FILE_DATE=$(date +"%m-%d %H.%M")" >> $GITHUB_ENV
         echo "FILE_DATE1=$(date "+%Y年%m月%d号-%H点%M分")" >> $GITHUB_ENV
         echo "FILE_DATE2=$(date "+%Y%m%d-%H%M")" >> $GITHUB_ENV
+        echo "FILE_DATE3=$(date "+%Y%m%d")" >> $GITHUB_ENV
  
     - name: 加载源,定制文件并生成自定义配置
       run: |
@@ -156,7 +157,9 @@ jobs:
         mkdir -p ./artifact/buildinfo
         cp -rf $(find openwrt/bin/packages/ -type f -name "*.ipk") ./artifact/package/
         cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
-        cp -rf $(find openwrt/bin/targets/ -type f -name "*squashfs*bin*" -o -name "*.bin") ./artifact/firmware/
+        cp -rf $(find openwrt/bin/targets/ -type f -name "*sysupgrade*bin*") ./artifact/firmware/
+        cd artifact/firmware
+        rename -v "s/openwrt-ramips-mt7621-xiaomi_redmi-router-ac2100-squashfs-sysupgrade/${{matrix.target}}-Ver${{ env.FILE_DATE3 }}-CSWIFI-OverClock/" *bin
         echo "::set-output name=status::success"
         
     - name: 上传固件到网盘
@@ -164,7 +167,7 @@ jobs:
       uses: easingthemes/ssh-deploy@master  
       env:
         SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}  
-        ARGS: "-avz --delete --exclude='*kernel*bin*'"
+        ARGS: "-avzr --exclude="
         REMOTE_PORT: ${{ secrets.SERVER_PORT }}   
         SOURCE: "./artifact/firmware/"
         REMOTE_HOST: ${{ secrets.SSH_HOST }} 
