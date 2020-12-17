@@ -21,6 +21,9 @@ on:
 env: 
   REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
   SCKEY: ${{ secrets.WEIXIN_SCKEY }}
+  DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}  
+  SERVER_IP: ${{ secrets.SSH_HOST }} 
+  USERNAME: ${{ secrets.SSH_USERNAME }}
   TZ: Asia/Shanghai
   GITHUB_RELEASE: https://github.com/gogogojason/RM2100/releases
 
@@ -58,7 +61,6 @@ jobs:
         echo "UPLOAD_RELEASE=${UPLOAD_RELEASE}" >> $GITHUB_ENV
         echo "SERVERCHAN_SCKEY=${SERVERCHAN_SCKEY}" >> $GITHUB_ENV
         echo "UPLOAD_MYPAN=${UPLOAD_MYPAN}" >> $GITHUB_ENV
-        echo "SERVERCHAN_SCKEY=${SERVERCHAN_SCKEY}" >> $GITHUB_ENV
   
     - name: 开始安装编译所需系统
       env:
