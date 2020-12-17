@@ -24,6 +24,8 @@ env:
   DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}  
   SERVER_IP: ${{ secrets.SSH_HOST }} 
   USERNAME: ${{ secrets.SSH_USERNAME }}
+  SERVER_PORT: ${{ secrets.SERVER_PORT }} 
+  SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
   TZ: Asia/Shanghai
   GITHUB_RELEASE: https://github.com/gogogojason/RM2100/releases
 
@@ -164,11 +166,11 @@ jobs:
       env:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}  
         ARGS: -avz --delete --exclude='*kernel*bin*'
-        SERVER_PORT: '1822'  
+        SERVER_PORT: ${{ secrets.SERVER_PORT }}   
         FOLDER: ./artifact/firmware/
         SERVER_IP: ${{ secrets.SSH_HOST }} 
         USERNAME: ${{ secrets.SSH_USERNAME }}
-        SERVER_DESTINATION: /mnt/disk2/appdata/h5ai/RedMi2100/${{matrix.target}}/
+        SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
         
     - name: 上传固件文件
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true'
