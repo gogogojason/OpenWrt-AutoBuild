@@ -1,4 +1,4 @@
-name: 编译Test
+name: 编译上传网盘test
 
 on:
  workflow_dispatch:
