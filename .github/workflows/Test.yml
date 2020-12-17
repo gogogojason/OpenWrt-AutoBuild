@@ -21,11 +21,11 @@ on:
 env: 
   REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
   SCKEY: ${{ secrets.WEIXIN_SCKEY }}
-  DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}  
-  SERVER_IP: ${{ secrets.SSH_HOST }} 
-  USERNAME: ${{ secrets.SSH_USERNAME }}
-  SERVER_PORT: ${{ secrets.SERVER_PORT }} 
-  SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
+  SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}  
+  REMOTE_PORT: ${{ secrets.SERVER_PORT }}         
+  REMOTE_HOST: ${{ secrets.SSH_HOST }} 
+  REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+  TARGET: ${{ secrets.SERVER_DESTINATION }}
   TZ: Asia/Shanghai
   GITHUB_RELEASE: https://github.com/gogogojason/RM2100/releases
 
@@ -159,17 +159,17 @@ jobs:
         cp -rf $(find openwrt/bin/targets/ -type f -name "*squashfs*bin*" -o -name "*.bin") ./artifact/firmware/
         echo "::set-output name=status::success"
         
-    - name: Deploy to Server
+    - name: 上传固件到网盘
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_MYPAN == 'true'  
-      uses: AEnterprise/rsync-deploy@v1.0  
+      uses: easingthemes/ssh-deploy@v2.1.50  
       env:
-        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}  
-        ARGS: -avz --delete --exclude='*kernel*bin*'
-        SERVER_PORT: ${{ secrets.SERVER_PORT }}   
-        FOLDER: ./artifact/firmware/
-        SERVER_IP: ${{ secrets.SSH_HOST }} 
-        USERNAME: ${{ secrets.SSH_USERNAME }}
-        SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
+        SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}  
+        ARGS: "-avz --delete --exclude='*kernel*bin*'"
+        REMOTE_PORT: ${{ secrets.SERVER_PORT }}   
+        SOURCE: "./artifact/firmware/"
+        REMOTE_HOST: ${{ secrets.SSH_HOST }} 
+        REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+        TARGET: ${{ secrets.SERVER_DESTINATION }}
         
     - name: 上传固件文件
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true'
