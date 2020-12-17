@@ -33,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [Sim_K2P]  #[Lean_x86_64,All_RM2100,Sim_RM2100,Ap_RM2100,Lienol_x86_64,]
+        target: [Ap_RM2100]  #[Lean_x86_64,All_RM2100,Sim_RM2100,Ap_RM2100,Lienol_x86_64,]
 
     steps:
     - name: 准备完成
@@ -56,6 +56,8 @@ jobs:
         echo "UPLOAD_COWTRANSFER=${UPLOAD_COWTRANSFER}" >> $GITHUB_ENV
         echo "UPLOAD_WETRANSFER=${UPLOAD_WETRANSFER}" >> $GITHUB_ENV
         echo "UPLOAD_RELEASE=${UPLOAD_RELEASE}" >> $GITHUB_ENV
+        echo "SERVERCHAN_SCKEY=${SERVERCHAN_SCKEY}" >> $GITHUB_ENV
+        echo "UPLOAD_MYPAN=${UPLOAD_MYPAN}" >> $GITHUB_ENV
         echo "SERVERCHAN_SCKEY=${SERVERCHAN_SCKEY}" >> $GITHUB_ENV
   
     - name: 开始安装编译所需系统
@@ -153,6 +155,18 @@ jobs:
         cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
         cp -rf $(find openwrt/bin/targets/ -type f -name "*squashfs*bin*" -o -name "*.bin") ./artifact/firmware/
         echo "::set-output name=status::success"
+        
+    - name: Deploy to Server
+      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_MYPAN == 'true'  
+      uses: AEnterprise/rsync-deploy@v1.0  
+      env:
+        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}  
+        ARGS: -avz --delete --exclude='*kernel*bin*'
+        SERVER_PORT: '1822'  
+        FOLDER: ./artifact/firmware/
+        SERVER_IP: ${{ secrets.SSH_HOST }} 
+        USERNAME: ${{ secrets.SSH_USERNAME }}
+        SERVER_DESTINATION: /mnt/disk2/appdata/h5ai/RedMi2100/${{matrix.target}}/
         
     - name: 上传固件文件
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true'
