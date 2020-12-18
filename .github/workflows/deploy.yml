@@ -28,9 +28,9 @@ jobs:
         uses: AEnterprise/rsync-deploy@v1.0  
         env:
            DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }} 
-           ARGS: -avz --delete --exclude='.pry'
+           ARGS: -avz --delete --exclude='*.pyc'
            SERVER_PORT: ${{ secrets.SERVER_PORT }}
            FOLDER: ./
            SERVER_IP: ${{ secrets.SSH_HOST }} 
            USERNAME: ${{ secrets.SSH_USERNAME }} 
-           SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
+           SERVER_DESTINATION: /mnt/disk2/appdata/h5ai/RedMi2100/Test
