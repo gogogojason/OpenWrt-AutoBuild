@@ -1,4 +1,4 @@
-ame: Deploy site files
+name: Deploy site files
 
 on:
   workflow_dispatch:
