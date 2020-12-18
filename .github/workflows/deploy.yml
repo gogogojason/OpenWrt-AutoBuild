@@ -39,4 +39,4 @@ jobs:
            FOLDER: ./
            SERVER_IP: ${{ secrets.SSH_HOST }} 
            USERNAME: ${{ secrets.SSH_USERNAME }} 
-           SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }} 
+           SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}${{matrix.target}}/
