@@ -25,8 +25,6 @@ jobs:
       - uses: actions/checkout@v2 # 第一步，下载代码仓库
 
       - name: Deploy to Server # 第二步，rsync推文件
-      - name: Deploy to Server
-
         uses: AEnterprise/rsync-deploy@v1.0  
         env:
           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}  
