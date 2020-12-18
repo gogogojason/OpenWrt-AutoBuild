@@ -175,7 +175,7 @@ jobs:
         rename -v "s/openwrt-ramips-mt7621-xiaomi_redmi-router-ac2100-squashfs-sysupgrade/${{matrix.target}}-Ver${{ env.FILE_DATE3 }}-CSWIFI-OverClock/" *bin
         echo "::set-output name=status::success"
  
-    - name: 上传到固件到网盘
+    - name: 上传固件到网盘
       uses: AEnterprise/rsync-deploy@v1.0 
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_MYPAN == 'true'
       env:
