@@ -33,4 +33,4 @@ jobs:
           FOLDER: ./ # 要推送的文件夹，路径相对于代码仓库的根目录
           SERVER_IP: ${{ secrets.SSH_HOST }} # 引用配置，服务器的host名（IP或者域名domain.com）
           USERNAME: ${{ secrets.SSH_USERNAME }} # 引用配置，服务器登录名
-          SERVER_DESTINATION: /mnt/disk2/appdata/h5ai/RM2100/Test/ # 部署到目标文件夹
+          SERVER_DESTINATION: /mnt/disk2/appdata/h5ai/RedMi2100/Test # 部署到目标文件夹
