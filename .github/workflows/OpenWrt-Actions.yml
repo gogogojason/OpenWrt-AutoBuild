@@ -180,7 +180,7 @@ jobs:
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_MYPAN == 'true'
       env:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }} 
-        ARGS: -avz --delete --exclude='*.pyc'
+        ARGS: -avzr --exclude=
         SERVER_PORT: ${{ secrets.SERVER_PORT }}
         FOLDER: ./artifact/firmware/
         SERVER_IP: ${{ secrets.SSH_HOST }} 
