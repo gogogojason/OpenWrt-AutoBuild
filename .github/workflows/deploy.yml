@@ -1,5 +1,5 @@
-name: Deploy site files
-
+name: 【上传网盘测试】
+        
 on:
   workflow_dispatch:
     inputs:
@@ -19,10 +19,16 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest # 使用ubuntu系统镜像运行自动化脚本
+    runs-on: ubuntu-latest # 使用ubuntu系统镜像运行自动化脚
+    name: 编译 ${{matrix.target}}
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [Test]  #[Lean_x86_64,All_RM2100,Sim_RM2100,Ap_RM2100,Lienol_x86_64,]
 
     steps: # 自动化步骤
       - uses: actions/checkout@v2 # 第一步，下载代码仓库
+    
 
       - name: 上传到固件到网盘
         uses: AEnterprise/rsync-deploy@v1.0  
@@ -33,4 +39,4 @@ jobs:
            FOLDER: ./
            SERVER_IP: ${{ secrets.SSH_HOST }} 
            USERNAME: ${{ secrets.SSH_USERNAME }} 
-           SERVER_DESTINATION: /mnt/disk2/appdata/h5ai/RedMi2100/Test
+           SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }} 
