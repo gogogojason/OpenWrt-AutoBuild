@@ -24,7 +24,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [Test]  #[Lean_x86_64,All_RM2100,Sim_RM2100,Ap_RM2100,Lienol_x86_64,]
+        target: [All_RM2100]  #[Lean_x86_64,All_RM2100,Sim_RM2100,Ap_RM2100,Lienol_x86_64,]
 
     steps: # 自动化步骤
       - uses: actions/checkout@v2 # 第一步，下载代码仓库
@@ -39,4 +39,4 @@ jobs:
            FOLDER: ./
            SERVER_IP: ${{ secrets.SSH_HOST }} 
            USERNAME: ${{ secrets.SSH_USERNAME }} 
-           SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}${{matrix.target}}/
+           SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}Test/${{matrix.target}}/
