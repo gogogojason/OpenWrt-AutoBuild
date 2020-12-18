@@ -149,18 +149,6 @@ jobs:
         cd artifact/firmware
         rename -v "s/openwrt-x86-64-generic-squashfs-combined/${{matrix.target}}-Ver${{ env.FILE_DATE3 }}/" *gz
         echo "::set-output name=status::success"
- 
-    - name: 上传固件到网盘
-      uses: AEnterprise/rsync-deploy@v1.0 
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_MYPAN == 'true'
-      env:
-        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }} 
-        ARGS: -avzr --exclude=
-        SERVER_PORT: ${{ secrets.SERVER_PORT }}
-        FOLDER: ./artifact/firmware/
-        SERVER_IP: ${{ secrets.SSH_HOST }} 
-        USERNAME: ${{ secrets.SSH_USERNAME }} 
-        SERVER_DESTINATION: /mnt/disk2/appdata/h5ai/Lean_x86_64/
 
     - name: 上传固件文件
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true'
@@ -202,6 +190,18 @@ jobs:
         curl -fsSL git.io/file-transfer | sh
         ./transfer wet -s -p 16 --no-progress ./artifact/firmware/ 2>&1 | tee wetransfer.log
         echo "::warning file=WeTransfer（${{matrix.target}}）::$(cat wetransfer.log | grep https)"
+        
+    - name: 上传固件到网盘
+      uses: AEnterprise/rsync-deploy@v1.0 
+      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_MYPAN == 'true'
+      env:
+        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }} 
+        ARGS: -avzr --exclude=
+        SERVER_PORT: ${{ secrets.SERVER_PORT }}
+        FOLDER: ./artifact/firmware/
+        SERVER_IP: ${{ secrets.SSH_HOST }} 
+        USERNAME: ${{ secrets.SSH_USERNAME }} 
+        SERVER_DESTINATION: /mnt/disk2/appdata/h5ai/Lean_x86_64/
     
     - name: 提取发布用的「奶牛快传」和「WeTransfer」的链接
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true'
