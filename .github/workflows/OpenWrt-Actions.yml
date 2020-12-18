@@ -51,7 +51,7 @@ jobs:
     - name: 检测脚本设置
       run: |
         source "${GITHUB_WORKSPACE}/build/common/settings.ini"
-        if [ -f "devices/${{matrix.target}}/settings.ini" ]; then
+        if [ -f "build/${{matrix.target}}/settings.ini" ]; then
           source "${GITHUB_WORKSPACE}/build/${{matrix.target}}/settings.ini"
         fi
         echo "REPO_URL=${REPO_URL}" >> $GITHUB_ENV
