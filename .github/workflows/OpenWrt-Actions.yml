@@ -122,6 +122,11 @@ jobs:
         if [ -n "$(ls -A "build/${{matrix.target}}/sources" 2>/dev/null)" ]; then
          cp -Rf build/${{matrix.target}}/sources/* ./
         fi
+        
+        echo "打补丁"
+        if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
+          find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
+        fi
 
         echo "写入配置文件"
          mv build/${{matrix.target}}/$CONFIG_FILE .config
