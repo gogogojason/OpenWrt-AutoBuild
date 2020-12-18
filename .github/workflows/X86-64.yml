@@ -160,7 +160,7 @@ jobs:
         FOLDER: ./artifact/firmware/
         SERVER_IP: ${{ secrets.SSH_HOST }} 
         USERNAME: ${{ secrets.SSH_USERNAME }} 
-        SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}${{matrix.target}}/
+        SERVER_DESTINATION: /mnt/disk2/appdata/h5ai/Lean_x86_64/
 
     - name: 上传固件文件
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true'
