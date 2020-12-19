@@ -22,7 +22,7 @@ git clone https://github.com/Lienol/openwrt-package.git package/Lienol
 #git clone https://github.com/kenzok8/small.git package/small
 #git clone https://github.com/kenzok8/openwrt-packages.git package/otherpackages
 #git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/lean/luci-app-adguardhome
-#git clone https://github.com/281677160/openwrt-package.git package/otherpackages2
+git clone https://github.com/281677160/openwrt-package.git package/otherpackages2
 
 
 # 更新并安装源
@@ -161,6 +161,7 @@ CONFIG_PACKAGE_luci-app-syncdial=y
 CONFIG_PACKAGE_luci-app-ttyd=y
 CONFIG_PACKAGE_luci-app-vssr=y
 CONFIG_PACKAGE_luci-app-vssr_INCLUDE_ShadowsocksR_Server=y
+CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray=y
 CONFIG_PACKAGE_luci-app-wrtbwmon=y
 CONFIG_PACKAGE_luci-app-webadmin=y
 CONFIG_PACKAGE_luci-app-zerotier=y
@@ -206,8 +207,8 @@ CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook is not set
 #CONFIG_PACKAGE_luci-app-passwall_INCLUDE_kcptun=y
 #CONFIG_PACKAGE_luci-app-passwall_INCLUDE_haproxy=y
-#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks=y
-#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd=y
 #CONFIG_PACKAGE_https-dns-proxy=y
 #CONFIG_PACKAGE_kcptun-client=y
 #CONFIG_PACKAGE_chinadns-ng=y
