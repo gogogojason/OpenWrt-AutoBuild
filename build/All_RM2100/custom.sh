@@ -26,7 +26,7 @@ git clone https://github.com/Lienol/openwrt-package.git package/Lienol
 
 
 # 更新并安装源
-#./scripts/feeds clean
+./scripts/feeds clean
 ./scripts/feeds update -a && ./scripts/feeds install -a
 ./scripts/feeds update -a && ./scripts/feeds install -a
 
