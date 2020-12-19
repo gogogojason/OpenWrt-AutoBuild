@@ -20,7 +20,7 @@ git clone https://github.com/Lienol/openwrt-package.git package/Lienol
 git clone https://github.com/kenzok8/small.git package/small
 git clone https://github.com/kenzok8/openwrt-packages.git package/otherpackages
 #git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/lean/luci-app-adguardhome
-#git clone https://github.com/281677160/openwrt-package.git package/otherpackages2
+git clone https://github.com/281677160/openwrt-package.git package/otherpackages2
 
 
 # 更新并安装源
