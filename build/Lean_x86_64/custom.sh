@@ -19,8 +19,8 @@ git clone https://github.com/gogogojason/luci-theme-edge -b 18.06 package/lean/l
 git clone https://github.com/281677160/openwrt-package.git package/otherpackages2
 git clone --depth=1 https://github.com/tty228/luci-app-serverchan.git package/lean/luci-app-serverchan
 #git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/lean/luci-app-adguardhome
-#git clone https://github.com/jerrykuku/lua-maxminddb.git package/lean/lua-maxminddb
-#git clone https://github.com/jerrykuku/luci-app-vssr.git package/lean/luci-app-vssr
+git clone https://github.com/jerrykuku/lua-maxminddb.git package/lean/lua-maxminddb
+git clone https://github.com/jerrykuku/luci-app-vssr.git package/lean/luci-app-vssr
 git clone https://github.com/Lienol/openwrt-package.git package/Lienol
 
 
@@ -213,6 +213,7 @@ EOF
 cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-vssr=y
 CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray=y
+CONFIG_PACKAGE_luci-app-vssr_INCLUDE_ShadowsocksR_Server=y
 CONFIG_PACKAGE_lua-maxminddb=y
 EOF
 
