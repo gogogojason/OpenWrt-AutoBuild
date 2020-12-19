@@ -13,19 +13,21 @@ cat feeds.conf.default
 
 # 添加第三方软件包
 git clone https://github.com/gogogojason/luci-theme-edge -b 18.06 package/lean/luci-theme-edge
+git clone https://github.com/sirpdboy/luci-app-autopoweroff.git package/lean/luci-app-autopoweroff
+git clone --depth=1 https://github.com/tty228/luci-app-serverchan.git package/lean/luci-app-serverchan
+git clone https://github.com/jerrykuku/lua-maxminddb.git package/lean/lua-maxminddb
+git clone https://github.com/jerrykuku/luci-app-vssr.git package/lean/luci-app-vssr
+git clone https://github.com/Lienol/openwrt-package.git package/Lienol
 #git clone https://github.com/db-one/dbone-update.git -b 18.06 package/dbone-update
 #git clone https://github.com/kenzok8/small.git package/small
 #git clone https://github.com/kenzok8/openwrt-packages.git package/otherpackages
-git clone https://github.com/281677160/openwrt-package.git package/otherpackages2
-git clone --depth=1 https://github.com/tty228/luci-app-serverchan.git package/lean/luci-app-serverchan
 #git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/lean/luci-app-adguardhome
-#git clone https://github.com/jerrykuku/lua-maxminddb.git package/lean/lua-maxminddb
-#git clone https://github.com/jerrykuku/luci-app-vssr.git package/lean/luci-app-vssr
-git clone https://github.com/Lienol/openwrt-package.git package/Lienol
+#git clone https://github.com/281677160/openwrt-package.git package/otherpackages2
 
 
 # 更新并安装源
 #./scripts/feeds clean
+./scripts/feeds update -a && ./scripts/feeds install -a
 ./scripts/feeds update -a && ./scripts/feeds install -a
 
 # 删除部分默认包
