@@ -38,6 +38,6 @@ jobs:
            FOLDER: ./
            SERVER_IP: ${{ secrets.SSH_HOST }} 
            USERNAME: ${{ secrets.SSH_USERNAME }} 
-           SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}Test/${{matrix.target}}/
+           SERVER_DESTINATION: /mnt/disk2/appdata/Test/
            
    #-avz --delete --exclude='*.pyc'
