@@ -39,15 +39,3 @@ jobs:
            REMOTE_HOST: ${{ secrets.SSH_HOST }} 
            REMOTE_USER: ${{ secrets.SSH_USERNAME }
            TARGET: "/mnt/disk2/appdata/Test/"
-           
-#          uses: AEnterprise/rsync-deploy@v1.0  
-#          env:
-#           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }} 
-#           ARGS: -avzr --exclude=
-#           SERVER_PORT: ${{ secrets.SERVER_PORT }}
-#           FOLDER: ./
-#           SERVER_IP: ${{ secrets.SSH_HOST }} 
-#           USERNAME: ${{ secrets.SSH_USERNAME }} 
- #          SERVER_DESTINATION: /mnt/disk2/appdata/Test/
-           
-   #-avz --delete --exclude='*.pyc'
