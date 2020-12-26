@@ -220,10 +220,15 @@ jobs:
         SERVER_IP: ${{ secrets.SSH_HOST }} 
         USERNAME: ${{ secrets.SSH_USERNAME }} 
         SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}${{matrix.target}}/
-        
+   
+    - name: 进入目录删除
+      run: |
+         cd /home/runner/work/_temp/_github_home/
+         sudo rm -rf .ssh
+
     - name: 上传Packages到网盘
       uses: AEnterprise/rsync-deploy@v1.0 
-      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_MYPAN == 'true'
+      if: steps.organizer.outputs.status == 'success' && env.UPLOAD_IPK == 'true'
       env:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }} 
         ARGS: -avz --delete --exclude='*.pyc'
