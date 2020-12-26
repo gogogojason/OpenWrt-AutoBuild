@@ -43,7 +43,7 @@ jobs:
       - name: 进入目录删除
         run: |
          cd /home/runner/work/_temp/_github_home/
-         rm -f .ssh
+         sudo rm -rf .ssh
 
       - name: 上传到固件到网盘
         uses: AEnterprise/rsync-deploy@v1.0  
