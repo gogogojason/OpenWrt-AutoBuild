@@ -16,11 +16,18 @@ env:
   REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
   SCKEY: ${{ secrets.WEIXIN_SCKEY }}
   TZ: Asia/Shanghai
+  GITHUB_RELEASE: https://github.com/gogogojason/OpenWrt-AutoBuild/releases
 
 jobs:
   build:
     runs-on: ubuntu-18.04
     if: github.event.repository.owner.id == github.event.sender.id
+    
+    name: 编译 ${{matrix.target}}
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [All_RM2100,Sim_RM2100,Ap_RM2100] 
 
     steps:
     - name: Checkout
@@ -50,6 +57,7 @@ jobs:
         sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
         cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
+    
     - name: Clone source code
       run: |
         git clone --depth=1 https://github.com/gogogojason/rt-n56u.git /opt/rt-n56u
@@ -68,15 +76,13 @@ jobs:
         echo "FILE_DATE3=$(date "+%Y%m%d")" >> $GITHUB_ENV
         
     - name: Build Firmware
-      env:
-        TNAME: RM2100
       run: |
         cd /opt/rt-n56u/trunk
-        if [ ! -f configs/templates/$TNAME.config ] ; then
-        echo "configs/templates/$TNAME.config not found "
+        if [ ! -f configs/templates/${{matrix.target}}.config ] ; then
+        echo "configs/templates/${{matrix.target}}.config not found "
         exit 1
         fi
-        cp -f configs/templates/$TNAME.config .config
+        cp -f configs/templates/${{matrix.target}}.config .config
         sed -i 's/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y/g' .config
         ################################################################################################
         #因不同型号配置功能不一样，所以先把配置项删除，如果你自己要添加其他的，也要写上删除这一条，切记！！！
@@ -142,11 +148,12 @@ jobs:
         echo "CONFIG_FIRMWARE_CPU_900MHZ=y" >> .config
         #########################################################################################
         sudo ./clear_tree
-        sudo ./build_firmware_modify $TNAME 0
+        sudo ./build_firmware_modify ${{matrix.target}} 0
         sudo mkdir -p /artifact/
         sudo mv -f images/*.trx /artifact/
         cd artifact
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+    
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()
@@ -171,13 +178,13 @@ jobs:
       run: |
         curl -fsSL git.io/file-transfer | sh
         ./transfer cow --block 2621440 -s -p 64 --no-progress /artifact/ 2>&1 | tee cowtransfer.log
-        echo "::warning file=奶牛快传（$TNAME）::$(cat cowtransfer.log | grep https)"
+        echo "::warning file=奶牛快传（${{matrix.target}}）::$(cat cowtransfer.log | grep https)"
     - name: 上传固件到 WeTransfer
       if: env.UPLOAD_WETRANSFER == 'true'
       run: |
         curl -fsSL git.io/file-transfer | sh
         ./transfer wet -s -p 16 --no-progress /artifact 2>&1 | tee wetransfer.log
-        echo "::warning file=WeTransfer（$TNAME）::$(cat wetransfer.log | grep https)"
+        echo "::warning file=WeTransfer（${{matrix.target}}）::$(cat wetransfer.log | grep https)"
 
     - name: 提取发布用的「奶牛快传」和「WeTransfer」的链接
       if: env.UPLOAD_RELEASE == 'true'
@@ -188,13 +195,14 @@ jobs:
         curl -fsSL git.io/file-transfer | sh
         ./transfer wet -s -p 16 --no-progress /artifact/ 2>&1 | tee wetransfer.log
         echo "WETRANSFER_URL=$(cat wetransfer.log | grep https | cut -f3 -d" ")" >> $GITHUB_ENV 
+    
     - name: 自动发布固件到 Releases
       uses: softprops/action-gh-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
         name: ${{ env.WXFB_MESSAGE }}
-        tag_name: ${{ env.FILE_DATE2 }}-$TNAME
+        tag_name: ${{ env.FILE_DATE2 }}-${{matrix.target}}
         body: |            
             ★  时间 : ${{ env.FILE_DATE1 }}            
             高速下载地址：
