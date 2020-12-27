@@ -27,6 +27,7 @@ jobs:
       uses: actions/checkout@v2
     - name: 检测脚本设置
       run: |
+        source "${GITHUB_WORKSPACE}/build/padavansettings/settings.ini"
         echo "REPO_URL=${REPO_URL}" >> $GITHUB_ENV
         echo "CONFIG_FILE=${CONFIG_FILE}" >> $GITHUB_ENV
         echo "WXFB_MESSAGE=${WXFB_MESSAGE}" >> $GITHUB_ENV
@@ -144,36 +145,42 @@ jobs:
         sudo ./build_firmware_modify $TNAME 0
         sudo mkdir -p /artifact/
         sudo mv -f images/*.trx /artifact/
+        cd artifact
+        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()
       with:
         name: Padavan-packages
         path: /artifact/
-
-    - name: 上传固件到 奶牛快传
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress /artifact/ 2>&1 | tee cowtransfer.log
-        echo "::warning file=奶牛快传（$TNAME）::$(cat cowtransfer.log | grep https)"
-    - name: 上传固件到 WeTransfer
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        ./transfer wet -s -p 16 --no-progress /artifact 2>&1 | tee wetransfer.log
-        echo "::warning file=WeTransfer（$TNAME）::$(cat wetransfer.log | grep https)"
         
     - name: 上传固件到网盘
+      if: env.UPLOAD_MYPAN == 'true'
       uses: AEnterprise/rsync-deploy@v1.0 
       env:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }} 
         ARGS: -avzr --exclude=
         SERVER_PORT: ${{ secrets.SERVER_PORT }}
-        FOLDER: ./
+        FOLDER: ${{ env.FIRMWARE }}
         SERVER_IP: ${{ secrets.SSH_HOST }} 
         USERNAME: ${{ secrets.SSH_USERNAME }} 
         SERVER_DESTINATION: /mnt/disk2/appdata/h5ai/Padavan/$TNAME
 
+    - name: 上传固件到 奶牛快传
+      if: env.UPLOAD_COWTRANSFER == 'true'
+      run: |
+        curl -fsSL git.io/file-transfer | sh
+        ./transfer cow --block 2621440 -s -p 64 --no-progress /artifact/ 2>&1 | tee cowtransfer.log
+        echo "::warning file=奶牛快传（$TNAME）::$(cat cowtransfer.log | grep https)"
+    - name: 上传固件到 WeTransfer
+      if: env.UPLOAD_WETRANSFER == 'true'
+      run: |
+        curl -fsSL git.io/file-transfer | sh
+        ./transfer wet -s -p 16 --no-progress /artifact 2>&1 | tee wetransfer.log
+        echo "::warning file=WeTransfer（$TNAME）::$(cat wetransfer.log | grep https)"
+
     - name: 提取发布用的「奶牛快传」和「WeTransfer」的链接
+      if: env.UPLOAD_RELEASE == 'true'
       run: |
         curl -fsSL git.io/file-transfer | sh
         ./transfer cow --block 2621440 -s -p 64 --no-progress /artifact/ 2>&1 | tee cowtransfer.log
@@ -202,7 +209,7 @@ jobs:
             
             ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
             
-        files: /artifact/*
+        files: ${{ env.FIRMWARE }}*
 
 #    - name: 删除旧的GitHub-workflow
 #      uses: ActionsRML/delete-workflow-runs@main
