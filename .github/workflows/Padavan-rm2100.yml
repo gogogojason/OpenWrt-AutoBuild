@@ -142,52 +142,47 @@ jobs:
         #########################################################################################
         sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME 0
-        sudo mkdir -p ./artifact/package
-        sudo mv -f images/*.trx ./artifact/package
+        sudo mkdir -p /artifact/
+        sudo mv -f images/*.trx /artifact/
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()
       with:
         name: Padavan-packages
-        path: ./artifact/package
+        path: /artifact/
 
     - name: 上传固件到 奶牛快传
-      if: env.UPLOAD_COWTRANSFER == 'true'
       run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress ./artifact/package/ 2>&1 | tee cowtransfer.log
+        ./transfer cow --block 2621440 -s -p 64 --no-progress /artifact/ 2>&1 | tee cowtransfer.log
         echo "::warning file=奶牛快传（$TNAME）::$(cat cowtransfer.log | grep https)"
     - name: 上传固件到 WeTransfer
-      if: env.UPLOAD_WETRANSFER == 'true'
       run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer wet -s -p 16 --no-progress ./artifact/package/ 2>&1 | tee wetransfer.log
+        ./transfer wet -s -p 16 --no-progress /artifact 2>&1 | tee wetransfer.log
         echo "::warning file=WeTransfer（$TNAME）::$(cat wetransfer.log | grep https)"
         
     - name: 上传固件到网盘
       uses: AEnterprise/rsync-deploy@v1.0 
-      if: env.UPLOAD_MYPAN == 'true'
       env:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }} 
         ARGS: -avzr --exclude=
         SERVER_PORT: ${{ secrets.SERVER_PORT }}
-        FOLDER: ./artifact/package/
+        FOLDER: /artifact/
         SERVER_IP: ${{ secrets.SSH_HOST }} 
         USERNAME: ${{ secrets.SSH_USERNAME }} 
         SERVER_DESTINATION: /mnt/disk2/appdata/h5ai/Padavan/$TNAME
 
     - name: 提取发布用的「奶牛快传」和「WeTransfer」的链接
-      if: env.UPLOAD_RELEASE == 'true'
       run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress ./artifact/package/ 2>&1 | tee cowtransfer.log
+        ./transfer cow --block 2621440 -s -p 64 --no-progress /artifact/ 2>&1 | tee cowtransfer.log
         echo "COWTRANSFER_URL=$(cat cowtransfer.log | grep https | cut -f3 -d" ")" >> $GITHUB_ENV 
         curl -fsSL git.io/file-transfer | sh
-        ./transfer wet -s -p 16 --no-progress ./artifact/package/ 2>&1 | tee wetransfer.log
+        ./transfer wet -s -p 16 --no-progress /artifact/ 2>&1 | tee wetransfer.log
         echo "WETRANSFER_URL=$(cat wetransfer.log | grep https | cut -f3 -d" ")" >> $GITHUB_ENV 
     - name: 自动发布固件到 Releases
       uses: softprops/action-gh-release@v1
-      if: env.UPLOAD_RELEASE == 'true'
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
@@ -207,7 +202,7 @@ jobs:
             
             ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
             
-        files: ./artifact/package/*
+        files: /artifact/*
 
 #    - name: 删除旧的GitHub-workflow
 #      uses: ActionsRML/delete-workflow-runs@main
