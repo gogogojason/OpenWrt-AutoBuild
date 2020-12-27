@@ -168,7 +168,7 @@ jobs:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }} 
         ARGS: -avzr --exclude=
         SERVER_PORT: ${{ secrets.SERVER_PORT }}
-        FOLDER: artifact/
+        FOLDER: ./
         SERVER_IP: ${{ secrets.SSH_HOST }} 
         USERNAME: ${{ secrets.SSH_USERNAME }} 
         SERVER_DESTINATION: /mnt/disk2/appdata/h5ai/Padavan/$TNAME
