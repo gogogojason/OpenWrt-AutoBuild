@@ -35,7 +35,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [All_RM2100,Sim_RM2100,Ap_RM2100] 
+        target: [RM2100] 
 
     steps:
     - name: Checkout
