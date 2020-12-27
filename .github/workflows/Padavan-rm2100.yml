@@ -1,17 +1,25 @@
 name: Build Padavan
 
-on: 
-  release:
-    types: [published]
-  push:
-    tags:
-    - 'v*'
+on:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
+
+#on: 
+#  release:
+#    types: [published]
+#  push:
+#    tags:
+#    - 'v*'
   #  branches: 
   #    - master
 #  schedule:
 #    - cron: 0 8 * * 5
-  watch:
-    types: [started]
+#  watch:
+#    types: [started]
 env: 
   REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
   SCKEY: ${{ secrets.WEIXIN_SCKEY }}
