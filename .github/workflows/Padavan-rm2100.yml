@@ -159,7 +159,6 @@ jobs:
         sudo ./build_firmware_modify ${{matrix.target}} 0
         sudo mkdir -p /artifact/
         sudo mv -f images/*.trx /artifact/
-        cd artifact
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
     
     - name : Upload packages
