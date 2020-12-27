@@ -171,7 +171,7 @@ jobs:
         FOLDER: ${{ env.FIRMWARE }}
         SERVER_IP: ${{ secrets.SSH_HOST }} 
         USERNAME: ${{ secrets.SSH_USERNAME }} 
-        SERVER_DESTINATION: /mnt/disk2/appdata/h5ai/Padavan/$TNAME
+        SERVER_DESTINATION: /mnt/disk2/appdata/h5ai/Padavan/${{matrix.target}}
 
     - name: 上传固件到 奶牛快传
       if: env.UPLOAD_COWTRANSFER == 'true'
@@ -239,7 +239,7 @@ jobs:
       if: env.SERVERCHAN_SCKEY == 'true'
       with:
         SCKEY: ${{ secrets.WEIXIN_SCKEY }}
-        text: 恭喜$TNAME固件编译成功！
+        text: 恭喜${{matrix.target}}固件编译成功！
         desp: 您的${{ env.WXFB_MESSAGE }}固件成功编译完成了！
 
               
