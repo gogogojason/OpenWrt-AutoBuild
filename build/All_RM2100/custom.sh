@@ -12,6 +12,7 @@ cat feeds.conf.default
 
 
 # 添加第三方软件包
+git clone https://github.com/vernesong/OpenClash.git package/luci-app-openclash
 git clone https://github.com/gogogojason/luci-theme-edge -b 18.06 package/lean/luci-theme-edge
 git clone https://github.com/sirpdboy/luci-app-autopoweroff.git package/lean/luci-app-autopoweroff
 git clone --depth=1 https://github.com/tty228/luci-app-serverchan.git package/lean/luci-app-serverchan
