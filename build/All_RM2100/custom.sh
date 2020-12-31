@@ -237,6 +237,34 @@ CONFIG_PACKAGE_trojan-go=y
 #CONFIG_PACKAGE_dns2socks=y
 EOF
 
+# vssr-plus插件配置#
+cat >> .config <<EOF
+#CONFIG_PACKAGE_luci-app-vssr-plus=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_Shadowsocks=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_V2ray=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_Trojan=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_Kcptun=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_ShadowsocksR_Server=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_Shadowsocks_Server=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_ShadowsocksR_Socks=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_Shadowsocks_Socks=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_ipt2socks=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_microsocks=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_dns2socks=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_dnscrypt_proxy=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_dnsforwarder=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_ChinaDNS=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_haproxy=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_privoxy=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_simple-obfs=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_simple-obfs-server=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_udpspeeder=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_udp2raw-tunnel=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_GoQuiet-client=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_GoQuiet-server=y
+#CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_v2ray-plugin=y
+EOF
+
 # 去掉默认设置:
 cat >> .config <<EOF
 # CONFIG_PACKAGE_luci-app-flowoffload is not set #开源 Linux Flow Offload 驱动
