@@ -114,6 +114,7 @@ CONFIG_PACKAGE_luci-app-poweroff=y #关机（增加关机功能）
 CONFIG_PACKAGE_luci-theme-edge=y #edge主题
 CONFIG_PACKAGE_luci-theme-bootstrap=y
 CONFIG_PACKAGE_luci-app-wrtbwmon-zh=y
+CONFIG_PACKAGE_luci-app-wrtbwmon-zhcn=y
 CONFIG_PACKAGE_wrtbwmon=y
 EOF
 
