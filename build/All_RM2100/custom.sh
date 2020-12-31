@@ -92,38 +92,8 @@ sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/theme
 cd build/All_RM2100
 touch ./.config
 
-#
 # ========================固件定制部分========================
-# 
 
-# 
-# 如果不对本区块做出任何编辑, 则生成默认配置固件. 
-# 
-
-# 以下为定制化固件选项和说明:
-#
-
-#
-# 有些插件/选项是默认开启的, 如果想要关闭, 请参照以下示例进行编写:
-# 
-#          =========================================
-#         |  # 取消编译VMware镜像:                    |
-#         |  cat >> .config <<EOF                   |
-#         |  # CONFIG_VMDK_IMAGES is not set        |
-#         |  EOF                                    |
-#          =========================================
-#
-
-# 
-# 以下是一些提前准备好的一些插件选项.
-# 直接取消注释相应代码块即可应用. 不要取消注释代码块上的汉字说明.
-# 如果不需要代码块里的某一项配置, 只需要删除相应行.
-#
-# 如果需要其他插件, 请按照示例自行添加.
-# 注意, 只需添加依赖链顶端的包. 如果你需要插件 A, 同时 A 依赖 B, 即只需要添加 A.
-# 
-# 无论你想要对固件进行怎样的定制, 都需要且只需要修改 EOF 回环内的内容.
-# 
 
 # 编译All_RM2100固件:
 cat >> .config <<EOF
@@ -183,18 +153,15 @@ CONFIG_PACKAGE_luci-app-autoreboot=y #定时重启
 CONFIG_PACKAGE_luci-app-accesscontrol=y #上网时间控制
 EOF
 
-# 插件汉化包:
+# VSSR插件:
 #cat >> .config <<EOF
-#CONFIG_PACKAGE_luci-i18n-socat-zh-cn=y
-#CONFIG_PACKAGE_luci-i18n-frpc-zh-cn=y
-#CONFIG_PACKAGE_luci-i18n-mwan3-zh-cn=y
-#CONFIG_PACKAGE_luci-i18n-mwan3helper-zh-cn=y
-#CONFIG_PACKAGE_luci-i18n-nps-zh-cn=y
-#CONFIG_PACKAGE_luci-i18n-smartdns-zh-cn=y
-#CONFIG_PACKAGE_luci-i18n-ttyd-zh-cn=y
-#CONFIG_PACKAGE_luci-i18n-webadmin-zh-cn=y
-#CONFIG_PACKAGE_luci-i18n-wrtbwmon-zh-cn=y
-#CONFIG_PACKAGE_luci-i18n-zerotier-zh-cn=y
+# CONFIG_PACKAGE_luci-app-vssr=y
+# CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray_plugin=y
+# CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray=y
+# CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Xray=y
+# CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Trojan=y
+# CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Kcptun=y
+# CONFIG_PACKAGE_luci-app-vssr_INCLUDE_ShadowsocksR_Server=y
 #EOF
 
 # Passwall插件:
@@ -238,7 +205,7 @@ CONFIG_PACKAGE_trojan-go=y
 EOF
 
 # vssr-plus插件配置#
-cat >> .config <<EOF
+#cat >> .config <<EOF
 #CONFIG_PACKAGE_luci-app-vssr-plus=y
 #CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_Shadowsocks=y
 #CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_V2ray=y
@@ -263,7 +230,7 @@ cat >> .config <<EOF
 #CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_GoQuiet-client=y
 #CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_GoQuiet-server=y
 #CONFIG_PACKAGE_luci-app-vssr-plus_INCLUDE_v2ray-plugin=y
-EOF
+#EOF
 
 # 去掉默认设置:
 cat >> .config <<EOF
