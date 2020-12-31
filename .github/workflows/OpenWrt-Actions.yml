@@ -118,10 +118,14 @@ jobs:
         echo "打补丁"
         if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
           find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
-        fi
+        fi        
+                
+        echo "删除默认插件包"
+        rm -rf package/lean/luci-app-netdata
+        rm -rf package/lean/luci-app-wrtbwmon
 
         echo "写入配置文件"
-         mv build/${{matrix.target}}/$CONFIG_FILE .config
+        mv build/${{matrix.target}}/$CONFIG_FILE .config
         make defconfig
 
     - name: SSH远程连接服务器配置固件
