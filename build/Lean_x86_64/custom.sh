@@ -216,7 +216,11 @@ EOF
 # VSSR专用插件:
 cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-vssr=y
+CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray_plugin=y
 CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray=y
+CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Xray=y
+CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Trojan=y
+CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Kcptun=y
 CONFIG_PACKAGE_luci-app-vssr_INCLUDE_ShadowsocksR_Server=y
 CONFIG_PACKAGE_lua-maxminddb=y
 EOF
