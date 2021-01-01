@@ -10,16 +10,17 @@ cat feeds.conf.default
 
 
 # 添加第三方软件包
+git clone https://github.com/gogogojason/OpenWrt-Packages.git package/jason 
 #git clone https://github.com/gogogojason/luci-theme-edge -b 18.06 package/lean/luci-theme-edge
-git clone https://github.com/db-one/dbone-update.git -b 18.06 package/dbone-update
-git clone https://github.com/kenzok8/small.git package/small
-git clone https://github.com/kenzok8/openwrt-packages.git package/otherpackages
-git clone https://github.com/281677160/openwrt-package.git package/otherpackages2
-git clone --depth=1 https://github.com/tty228/luci-app-serverchan.git package/lean/luci-app-serverchan
+#git clone https://github.com/db-one/dbone-update.git -b 18.06 package/dbone-update
+#git clone https://github.com/kenzok8/small.git package/small
+#git clone https://github.com/kenzok8/openwrt-packages.git package/otherpackages
+#git clone https://github.com/281677160/openwrt-package.git package/otherpackages2
+#git clone --depth=1 https://github.com/tty228/luci-app-serverchan.git package/lean/luci-app-serverchan
 #git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/lean/luci-app-adguardhome
 #git clone https://github.com/jerrykuku/lua-maxminddb.git package/lean/lua-maxminddb
 #git clone https://github.com/jerrykuku/luci-app-vssr.git package/lean/luci-app-vssr
-git clone https://github.com/Lienol/openwrt-package.git package/Lienol
+#git clone https://github.com/Lienol/openwrt-package.git package/Lienol
 
 # 更新并安装源
 #./scripts/feeds clean
@@ -31,7 +32,7 @@ git clone https://github.com/Lienol/openwrt-package.git package/Lienol
 
 # 自定义定制选项
 # 定义部分以及需要添加对应APP必须的文件
-device_name='MyRouter'                                                      # 自定义设备名
+device_name='K2PRouter'                                                      # 自定义设备名
 wifi_name="K2PWiFi"                                                          # 自定义Wifi 名字
 wifi_name5g="K2PWiFi_5G"                                                     # 自定义Wifi 名字
 lan_ip='192.168.2.1'                                                        # 自定义Lan Ip地址
@@ -141,41 +142,41 @@ EOF
 # Passwall插件:
 cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-passwall=y
-#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ipt2socks=y
-#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks=y
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ipt2socks is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks is not set
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR=y
-#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=y
-#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y
-#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus=y
-#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y
-#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook=y
-#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_kcptun=y
-#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_haproxy=y
-#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks=y
-#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd=y
-#CONFIG_PACKAGE_https-dns-proxy=y
-#CONFIG_PACKAGE_kcptun-client=y
-#CONFIG_PACKAGE_chinadns-ng=y
-#CONFIG_PACKAGE_haproxy=y
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_kcptun is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_haproxy is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd is not set
+# CONFIG_PACKAGE_https-dns-proxy is not set
+# CONFIG_PACKAGE_kcptun-client is not set
+# CONFIG_PACKAGE_chinadns-ng is not set
+# CONFIG_PACKAGE_haproxy is not set
 CONFIG_PACKAGE_xray=y
-CONFIG_PACKAGE_v2ray=y
-CONFIG_PACKAGE_v2ray-plugin=y
-#CONFIG_PACKAGE_simple-obfs=y
-#CONFIG_PACKAGE_trojan-plus=y
-#CONFIG_PACKAGE_trojan-go=y
-#CONFIG_PACKAGE_brook=y
-#CONFIG_PACKAGE_ssocks=y
-#CONFIG_PACKAGE_naiveproxy=y
-#CONFIG_PACKAGE_ipt2socks=y
-#CONFIG_PACKAGE_shadowsocks-libev-config=y
-#CONFIG_PACKAGE_shadowsocks-libev-ss-local=y
-#CONFIG_PACKAGE_shadowsocks-libev-ss-redir=y
-#CONFIG_PACKAGE_shadowsocksr-libev-alt=y
-#CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=y
-#CONFIG_PACKAGE_pdnsd-alt=y
-#CONFIG_PACKAGE_dns2socks=y
+# CONFIG_PACKAGE_v2ray is not set
+# CONFIG_PACKAGE_v2ray-plugin is not set
+# CONFIG_PACKAGE_simple-obfs is not set
+# CONFIG_PACKAGE_trojan-plus is not set
+# CONFIG_PACKAGE_trojan-go is not set
+# CONFIG_PACKAGE_brook is not set
+# CONFIG_PACKAGE_ssocks is not set
+# CONFIG_PACKAGE_naiveproxy is not set
+# CONFIG_PACKAGE_ipt2socks is not set
+# CONFIG_PACKAGE_shadowsocks-libev-config is not set
+# CONFIG_PACKAGE_shadowsocks-libev-ss-local is not set
+# CONFIG_PACKAGE_shadowsocks-libev-ss-redir is not set
+# CONFIG_PACKAGE_shadowsocksr-libev-alt is not set
+# CONFIG_PACKAGE_shadowsocksr-libev-ssr-local is not set
+# CONFIG_PACKAGE_pdnsd-alt is not set
+# CONFIG_PACKAGE_dns2socks is not set
 EOF
 
 # 去掉默认设置:
