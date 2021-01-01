@@ -130,10 +130,10 @@ CONFIG_PACKAGE_luci-app-socat=y
 CONFIG_PACKAGE_luci-app-frpc=y
 CONFIG_PACKAGE_luci-app-mwan3=y
 CONFIG_PACKAGE_luci-app-mwan3helper=y
-CONFIG_PACKAGE_luci-app-nps=y
 CONFIG_PACKAGE_luci-app-syncdial=y
 CONFIG_PACKAGE_luci-app-ttyd=y
 CONFIG_PACKAGE_luci-app-wrtbwmon-zh=y
+# CONFIG_PACKAGE_luci-app-wrtbwmon is not set
 CONFIG_PACKAGE_luci-app-wrtbwmon-zhcn=y
 CONFIG_PACKAGE_wrtbwmon=y
 CONFIG_PACKAGE_luci-app-webadmin=y
@@ -149,13 +149,14 @@ CONFIG_PACKAGE_luci-app-upnp=y
 CONFIG_PACKAGE_luci-app-filetransfer=y #系统-文件传输
 CONFIG_PACKAGE_luci-app-autoreboot=y #定时重启
 CONFIG_PACKAGE_luci-app-accesscontrol=y #上网时间控制
+#CONFIG_PACKAGE_luci-app-nps=y
 EOF
 
 # VSSR插件:
 cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-vssr=y
-CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray_plugin=y
-CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray=y
+#CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray_plugin=y
+#CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray=y
 CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Xray=y
 # CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Trojan is not set
 # CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Kcptun is not set
@@ -168,12 +169,12 @@ CONFIG_PACKAGE_luci-app-passwall=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ipt2socks is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks is not set
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR=y
-#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=y
-#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_kcptun is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_haproxy is not set
@@ -184,11 +185,11 @@ CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd=y
 # CONFIG_PACKAGE_chinadns-ng is not set
 # CONFIG_PACKAGE_haproxy is not set
 CONFIG_PACKAGE_xray=y
-CONFIG_PACKAGE_v2ray=y
-CONFIG_PACKAGE_v2ray-plugin=y
+# CONFIG_PACKAGE_v2ray is not set
+# CONFIG_PACKAGE_v2ray-plugin is not set
 # CONFIG_PACKAGE_simple-obfs is not set
-CONFIG_PACKAGE_trojan-plus=y
-CONFIG_PACKAGE_trojan-go=y
+# CONFIG_PACKAGE_trojan-plus is not set
+# CONFIG_PACKAGE_trojan-go is not set
 # CONFIG_PACKAGE_brook is not set
 # CONFIG_PACKAGE_ssocks is not set
 # CONFIG_PACKAGE_naiveproxy is not set
