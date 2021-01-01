@@ -13,6 +13,7 @@ cat feeds.conf.default
 
 # 添加第三方软件包
 git clone https://github.com/gogogojason/OpenWrt-Packages.git package/jason
+git clone https://github.com/gogogojason/logos.git package/logos
 #git clone https://github.com/gogogojason/luci-theme-edge -b 18.06 package/lean/luci-theme-edge
 #git clone https://github.com/db-one/dbone-update.git -b 18.06 package/dbone-update
 #git clone https://github.com/kenzok8/small.git package/small
@@ -62,6 +63,12 @@ sed -i "s/OpenWrt/$device_name/g" package/base-files/files/bin/config_generate
 
 echo "修改ADG默认更新地址"
 sed -i 's/${Arch}_softfloat/${Arch}/g' package/jason/luci-app-adguardhome/root/usr/share/AdGuardHome/links.txt
+
+echo "更换主题LOGO"
+rm -f package/jason/luci-theme-edge/htdocs/luci-static/edge/logo.png
+cp package/logos/oplogo.png package/jason/luci-theme-edge/htdocs/luci-static/edge/logo.png
+rm package/logos -r
+
 
 #echo "时区设置"
 #sed -i "s/'UTC'/'CST-8'\n   set system.@system[-1].zonename='$utc_name'/g" package/base-files/files/bin/config_generate
