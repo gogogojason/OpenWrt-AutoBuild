@@ -202,8 +202,8 @@ CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_kcptun is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_haproxy is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd is not set
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd=y
 # CONFIG_PACKAGE_https-dns-proxy is not set
 # CONFIG_PACKAGE_kcptun-client is not set
 # CONFIG_PACKAGE_chinadns-ng is not set
