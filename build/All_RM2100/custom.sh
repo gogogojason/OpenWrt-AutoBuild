@@ -116,7 +116,7 @@ EOF
 # 第三方插件选择:
 cat >> .config <<EOF
 # CONFIG_PACKAGE_luci-app-oaf=y #应用过滤
-# CONFIG_PACKAGE_luci-app-openclash is not set #OpenClash客户端
+CONFIG_PACKAGE_luci-app-openclash=y #OpenClash客户端
 CONFIG_PACKAGE_luci-app-serverchan=y #微信推送
 CONFIG_PACKAGE_luci-app-eqos=y #IP限速
 # CONFIG_PACKAGE_luci-app-control-weburl=y #网址过滤
@@ -165,10 +165,10 @@ EOF
 
 # Passwall插件:
 cat >> .config <<EOF
-CONFIG_PACKAGE_luci-app-passwall=y
+# CONFIG_PACKAGE_luci-app-passwall is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ipt2socks is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks is not set
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR=y
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin is not set
@@ -178,13 +178,13 @@ CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_kcptun is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_haproxy is not set
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd=y
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd is not set
 # CONFIG_PACKAGE_https-dns-proxy is not set
 # CONFIG_PACKAGE_kcptun-client is not set
 # CONFIG_PACKAGE_chinadns-ng is not set
 # CONFIG_PACKAGE_haproxy is not set
-CONFIG_PACKAGE_xray=y
+# CONFIG_PACKAGE_xray is not set
 # CONFIG_PACKAGE_v2ray is not set
 # CONFIG_PACKAGE_v2ray-plugin is not set
 # CONFIG_PACKAGE_simple-obfs is not set
