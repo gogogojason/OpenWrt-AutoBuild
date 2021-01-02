@@ -155,8 +155,8 @@ EOF
 # VSSR插件:
 cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-vssr=y
-# CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray_plugin is not set
-# CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray is not set
+CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray_plugin=y
+CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray=y
 CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Xray=y
 # CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Trojan is not set
 # CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Kcptun is not set
@@ -165,14 +165,14 @@ EOF
 
 # Passwall插件:
 cat >> .config <<EOF
-# CONFIG_PACKAGE_luci-app-passwall is not set
+CONFIG_PACKAGE_luci-app-passwall=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ipt2socks is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR is not set
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs is not set
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook is not set
@@ -184,10 +184,10 @@ cat >> .config <<EOF
 # CONFIG_PACKAGE_kcptun-client is not set
 # CONFIG_PACKAGE_chinadns-ng is not set
 # CONFIG_PACKAGE_haproxy is not set
-# CONFIG_PACKAGE_xray is not set
-# CONFIG_PACKAGE_v2ray is not set
-# CONFIG_PACKAGE_v2ray-plugin is not set
-# CONFIG_PACKAGE_simple-obfs is not set
+CONFIG_PACKAGE_xray=y
+CONFIG_PACKAGE_v2ray=y
+CONFIG_PACKAGE_v2ray-plugin=y
+CONFIG_PACKAGE_simple-obfs=y
 # CONFIG_PACKAGE_trojan-plus is not set
 # CONFIG_PACKAGE_trojan-go is not set
 # CONFIG_PACKAGE_brook is not set
