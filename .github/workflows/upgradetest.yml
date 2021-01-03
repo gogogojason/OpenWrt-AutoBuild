@@ -1,4 +1,4 @@
-name: 测试test
+name: 测试一下
 
 on:
   workflow_dispatch:
