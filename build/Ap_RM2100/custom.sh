@@ -69,7 +69,7 @@ sed -i "s/bootstrap/argon/g" feeds/luci/modules/luci-base/root/etc/config/luci
 sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 
 echo "添加软件包"
-sed -i 's/exit 0//g'
+sed -i 's/exit 0//g' package/lean/default-settings/files/zzz-default-settings
 echo 'sed -i \'$a src/gz jason_packages http://openwrt.ink:8666/RedMi2100/Packages/\' /etc/opkg/distfeeds.conf' >>package/lean/default-settings/files/zzz-default-settings
 echo 'sed -i '$a exit 0' >>package/lean/default-settings/files/zzz-default-settings
 
