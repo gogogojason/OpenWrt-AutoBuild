@@ -1,4 +1,4 @@
-name: 编译OpenWrt固件
+name: 测试test
 
 on:
   workflow_dispatch:
