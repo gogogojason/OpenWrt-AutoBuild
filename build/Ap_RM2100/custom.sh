@@ -40,7 +40,6 @@ wifi_name="RMWiFi"                                                          # �
 wifi_name5g="RMWiFi_5G"                                                     # 自定义Wifi 名字
 lan_ip='192.168.2.1'                                                        # 自定义Lan Ip地址
 utc_name='Asia\/Shanghai'                                                   # 自定义时区
-a='$a' 
 #ver_name='D201212'                                                          # 版本号
 #ver_op='R20.12.12'                                                          # 编译的版本
 delete_bootstrap=false                                                      # 是否删除默认主题 true 、false
@@ -71,6 +70,7 @@ sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/theme
 
 echo "添加软件包"
 sed -i 's/exit 0//g' package/lean/default-settings/files/zzz-default-settings
+a='$a' 
 echo "sed -i '$a src/gz jason_packages http://openwrt.ink:8666/RedMi2100/Packages/' /etc/opkg/distfeeds.conf" >>package/lean/default-settings/files/zzz-default-settings
 echo 'exit 0' >>package/lean/default-settings/files/zzz-default-settings
 
