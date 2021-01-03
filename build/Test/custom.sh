@@ -5,27 +5,28 @@
 # sudo -E apt-get -y install rename
 
 # 更新feeds文件
-#sed -i 's/#src-git helloworld https:\/\/github.com\/fw876\/helloworld/src-git otherpackages https:\/\/github.com\/kenzok8\/openwrt-packages.git/g' feeds.conf.default #启用helloworld
-cat feeds.conf.default
-#sed -i '$a src-git otherpackages https://github.com/kenzok8/openwrt-packages.git' feeds.conf.default
-#sed -i '$a src-git small https://github.com/kenzok8/small.git' feeds.conf.default
+# sed -i 's@#src-git helloworld@src-git helloworld@g' feeds.conf.default #启用helloworld
 cat feeds.conf.default
 
+
 # 添加第三方软件包
-git clone https://github.com/gogogojason/luci-theme-edge -b 18.06 package/lean/luci-theme-edge
-#git clone https://github.com/db-one/dbone-update.git -b 18.06 package/dbone-update
+git clone https://github.com/gogogojason/OpenWrt-Packages.git package/jason
+#git clone https://github.com/gogogojason/luci-theme-edge -b 18.06 package/lean/luci-theme-edge
 #git clone https://github.com/kenzok8/small.git package/small
 #git clone https://github.com/kenzok8/openwrt-packages.git package/otherpackages
-#git clone https://github.com/281677160/openwrt-package.git package/otherpackages2
+#git clone https://github.com/sirpdboy/luci-app-autopoweroff.git package/lean/luci-app-autopoweroff
 #git clone --depth=1 https://github.com/tty228/luci-app-serverchan.git package/lean/luci-app-serverchan
-#git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/lean/luci-app-adguardhome
 #git clone https://github.com/jerrykuku/lua-maxminddb.git package/lean/lua-maxminddb
 #git clone https://github.com/jerrykuku/luci-app-vssr.git package/lean/luci-app-vssr
-git clone https://github.com/Lienol/openwrt-package.git package/Lienol
+#git clone https://github.com/Lienol/openwrt-package.git package/Lienol
+#git clone https://github.com/db-one/dbone-update.git -b 18.06 package/dbone-update
+#git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/lean/luci-app-adguardhome
+#git clone https://github.com/281677160/openwrt-package.git package/otherpackages2
 
 
 # 更新并安装源
-#./scripts/feeds clean
+./scripts/feeds clean
+./scripts/feeds update -a && ./scripts/feeds install -a
 ./scripts/feeds update -a && ./scripts/feeds install -a
 
 # 删除部分默认包
@@ -39,7 +40,8 @@ wifi_name="RMWiFi"                                                          # �
 wifi_name5g="RMWiFi_5G"                                                     # 自定义Wifi 名字
 lan_ip='192.168.2.1'                                                        # 自定义Lan Ip地址
 utc_name='Asia\/Shanghai'                                                   # 自定义时区
-#ver_name='D201206'                                                          # 版本号
+#ver_name='D201212'                                                          # 版本号
+#ver_op='R20.12.12'                                                          # 编译的版本
 delete_bootstrap=false                                                      # 是否删除默认主题 true 、false
 default_theme='luci-theme-edge'                                             # 默认主题 结合主题文件夹名字
 openClash_url='https://github.com/vernesong/OpenClash.git'                  # OpenClash包地址
@@ -66,8 +68,14 @@ sed -i 's/+luci-theme-bootstrap/+luci-theme-edge/g' feeds/luci/collections/luci/
 sed -i "s/bootstrap/argon/g" feeds/luci/modules/luci-base/root/etc/config/luci
 sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 
+echo "添加软件包"
+sed -i 's/exit 0//g' package/lean/default-settings/files/zzz-default-settings
+a='$a' 
+echo "sed -i '$a src/gz jason_packages http://openwrt.ink:8666/RedMi2100/Packages/' /etc/opkg/distfeeds.conf" >>package/lean/default-settings/files/zzz-default-settings
+echo 'exit 0' >>package/lean/default-settings/files/zzz-default-settings
+
 #echo "修改版本信息"
-#sed -i "s/R20.10.20/R20.10.20\/hfy166 Ver.$ver_name/g" package/lean/default-settings/files/zzz-default-settings
+#sed -i "s/$ver_op/$ver_op\/hfy166 Ver.$ver_name/g" package/lean/default-settings/files/zzz-default-settings
 
 #echo "取消默认密码"
 #sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz-default-settings #取消系统默认密码
@@ -80,52 +88,25 @@ sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/theme
 #sed -i 's@e5effd@f8fbfe@g' package/dbone-update/luci-theme-edge/htdocs/luci-static/edge/cascade.css #luci-theme-edge主题颜色微调
 #sed -i 's#223, 56, 18, 0.04#223, 56, 18, 0.02#g' package/dbone-update/luci-theme-edge/htdocs/luci-static/edge/cascade.css #luci-theme-edge主题颜色微调
 
-#创建自定义配置文件 - Test
+#创建自定义配置文件 - Ap_RM2100
 
-cd build/Test
+cd build/Ap_RM2100
 touch ./.config
 
-#
 # ========================固件定制部分========================
-# 
 
-# 
-# 如果不对本区块做出任何编辑, 则生成默认配置固件. 
-# 
-
-# 以下为定制化固件选项和说明:
-#
-
-#
-# 有些插件/选项是默认开启的, 如果想要关闭, 请参照以下示例进行编写:
-# 
-#          =========================================
-#         |  # 取消编译VMware镜像:                   |
-#         |  cat >> .config <<EOF                   |
-#         |  # CONFIG_VMDK_IMAGES is not set        |
-#         |  EOF                                    |
-#          =========================================
-#
-
-# 
-# 以下是一些提前准备好的一些插件选项.
-# 直接取消注释相应代码块即可应用. 不要取消注释代码块上的汉字说明.
-# 如果不需要代码块里的某一项配置, 只需要删除相应行.
-#
-# 如果需要其他插件, 请按照示例自行添加.
-# 注意, 只需添加依赖链顶端的包. 如果你需要插件 A, 同时 A 依赖 B, 即只需要添加 A.
-# 
-# 无论你想要对固件进行怎样的定制, 都需要且只需要修改 EOF 回环内的内容.
-# 
 
 # 编译Ap_RM2100固件:
 cat >> .config <<EOF
 CONFIG_TARGET_ramips=y
 CONFIG_TARGET_ramips_mt7621=y
 CONFIG_TARGET_ramips_mt7621_DEVICE_xiaomi_redmi-router-ac2100=y
-#CONFIG_TARGET_ramips_mt7621_DEVICE_phicomm_k2p=y
 EOF
 
+# 开启FPU支持
+#cat >> .config <<EOF
+#CONFIG_KERNEL_MIPS_FPU_EMULATOR=y
+#EOF
 
 # IPv6支持:
 #cat >> .config <<EOF
@@ -137,9 +118,10 @@ EOF
 cat >> .config <<EOF
 #CONFIG_PACKAGE_luci-app-poweroff=y #关机（增加关机功能）
 CONFIG_PACKAGE_luci-theme-edge=y #edge主题
-#CONFIG_PACKAGE_luci-app-smartdns=y
-#CONFIG_PACKAGE_smartdns=y
 CONFIG_PACKAGE_luci-theme-bootstrap=y
+#CONFIG_PACKAGE_luci-app-wrtbwmon-zh=y
+#CONFIG_PACKAGE_luci-app-wrtbwmon-zhcn=y
+#CONFIG_PACKAGE_wrtbwmon=y
 EOF
 
 
@@ -148,8 +130,6 @@ cat >> .config <<EOF
 # CONFIG_PACKAGE_adbyby is not set
 # CONFIG_PACKAGE_coreutils is not set
 # CONFIG_PACKAGE_dns2socks is not set
-# CONFIG_PACKAGE_luci-app-webadmin is not set
-# CONFIG_PACKAGE_luci-app-webadmin is not set
 # CONFIG_PACKAGE_etherwake is not set
 # CONFIG_PACKAGE_ip-full is not set
 # CONFIG_PACKAGE_ipset is not set
