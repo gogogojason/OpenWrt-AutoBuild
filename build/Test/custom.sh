@@ -73,7 +73,7 @@ echo "添加软件包"
 sed -i 's/exit 0//g' package/lean/default-settings/files/zzz-default-settings
 a='$a'
 b='$(TZ=UTC-8 date "+%m.%d.%Y")'
-echo "sed -i '$a src/gz jason_packages http://openwrt.ink:8666/RedMi2100/Packages/' /etc/opkg/distfeeds.conf" >>package/lean/default-settings/files/zzz-default-settings
+echo "sed -i '$a src/gz jason_packages http://openwrt.ink:8666/RedMi2100/Packages' /etc/opkg/distfeeds.conf" >>package/lean/default-settings/files/zzz-default-settings
 #echo "echo '' >>/etc/openwrt_version" >>package/lean/default-settings/files/zzz-default-settings
 #echo "echo '$b' >>/etc/openwrt_version" >>package/lean/default-settings/files/zzz-default-settings
 echo 'exit 0' >>package/lean/default-settings/files/zzz-default-settings
