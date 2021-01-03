@@ -117,9 +117,8 @@ jobs:
         echo "删除默认插件包"
         rm -rf package/lean/luci-app-netdata
         rm -rf package/lean/luci-app-wrtbwmon
-        echo "写入配置文件"
-        mv build/${{matrix.target}}/$CONFIG_FILE .config
-        make defconfig
+
+
     - name: SSH远程连接服务器配置固件
       uses: garypang13/debugger-action@master
       if: env.SSH_ACTIONS == 'true' || (github.event.inputs.ssh == 'ssh' && github.event.inputs.ssh  != 'false')
