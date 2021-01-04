@@ -69,6 +69,14 @@ rm -f package/jason/luci-theme-edge/htdocs/luci-static/edge/logo.png
 cp package/logos/oplogo.png package/jason/luci-theme-edge/htdocs/luci-static/edge/logo.png
 rm package/logos -r
 
+echo "防掉线"
+INTERFAC='$INTERFACE'
+LOG='$LOG'
+sed -i "88a\		ifdown $INTERFACE" feeds/packages/net/mwan3/files/etc/hotplug.d/iface/15-mwan3
+sed -i "89a\		sleep 3" feeds/packages/net/mwan3/files/etc/hotplug.d/iface/15-mwan3
+sed -i "90a\		ifup $INTERFACE" feeds/packages/net/mwan3/files/etc/hotplug.d/iface/15-mwan3
+sed -i "91a\		$LOG notice "Recycled $INTERFACE..."" feeds/packages/net/mwan3/files/etc/hotplug.d/iface/15-mwan3
+
 
 #echo "时区设置"
 #sed -i "s/'UTC'/'CST-8'\n   set system.@system[-1].zonename='$utc_name'/g" package/base-files/files/bin/config_generate
