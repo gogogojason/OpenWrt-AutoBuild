@@ -111,15 +111,15 @@ CONFIG_TARGET_ramips_mt7621_DEVICE_xiaomi_redmi-router-ac2100=y
 EOF
 
 # 开启FPU支持
-#cat >> .config <<EOF
-#CONFIG_KERNEL_MIPS_FPU_EMULATOR=y
-#EOF
+cat >> .config <<EOF
+CONFIG_KERNEL_MIPS_FPU_EMULATOR=y
+EOF
 
 # IPv6支持:
-#cat >> .config <<EOF
-#CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
-#CONFIG_PACKAGE_ipv6helper=y
-#EOF
+cat >> .config <<EOF
+CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
+CONFIG_PACKAGE_ipv6helper=y
+EOF
 
 # 第三方插件选择:
 cat >> .config <<EOF
@@ -127,10 +127,47 @@ cat >> .config <<EOF
 CONFIG_PACKAGE_luci-theme-edge=y #edge主题
 CONFIG_PACKAGE_luci-theme-bootstrap=y
 CONFIG_PACKAGE_luci-app-gpsysupgrade=y
-CONFIG_PACKAGE_luci-app-bypass=y
 #CONFIG_PACKAGE_luci-app-wrtbwmon-zh=y
 #CONFIG_PACKAGE_luci-app-wrtbwmon-zhcn=y
 #CONFIG_PACKAGE_wrtbwmon=y
+CONFIG_PACKAGE_luci-app-ddns=y #DDNS服务
+CONFIG_DEFAULT_luci-app-vlmcsd=y #KMS激活服务器
+CONFIG_PACKAGE_luci-app-eqos=y #IP限速
+#CONFIG_PACKAGE_luci-app-adguardhome=y #ADguardhome
+CONFIG_PACKAGE_luci-app-poweroff=y #关机（增加关机功能）
+CONFIG_PACKAGE_luci-app-filetransfer=y #系统-文件传输
+CONFIG_PACKAGE_luci-app-autoreboot=y #定时重启
+CONFIG_PACKAGE_luci-app-upnp=y #通用即插即用UPnP(端口自动转发)
+CONFIG_PACKAGE_luci-app-accesscontrol=y #上网时间控制
+CONFIG_PACKAGE_luci-app-wol=y #网络唤醒
+CONFIG_PACKAGE_luci-app-webadmin=y #Web管理页面设置
+CONFIG_PACKAGE_luci-app-socat=y
+CONFIG_PACKAGE_luci-app-mwan3=y
+CONFIG_PACKAGE_luci-app-mwan3helper=y
+CONFIG_PACKAGE_luci-theme-bootstrap=y
+CONFIG_PACKAGE_luci-app-syncdial=y
+CONFIG_PACKAGE_luci-app-ttyd=y
+CONFIG_PACKAGE_luci-app-webadmin=y
+CONFIG_PACKAGE_luci-app-zerotier=y
+CONFIG_PACKAGE_luci-app-sfe=y #高通开源的 Shortcut FE 转发加速引擎
+EOF
+
+# 添加Passwall+:
+cat >> .config <<EOF
+CONFIG_PACKAGE_luci-app-bypass=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Shadowsocks_Server=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_ShadowsocksR_Server=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Simple_obfs=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Simple_obfs_server=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_V2ray_plugin=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_V2ray=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Xray=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan=y
+# CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan-Go is not set
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_NaiveProxy=y
+# CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Kcptun is not set
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Socks5_Proxy=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Socks_Server=y
 EOF
 
 
@@ -153,10 +190,8 @@ cat >> .config <<EOF
 # CONFIG_PACKAGE_libpcap is not set
 # CONFIG_PACKAGE_libsodium is not set
 # CONFIG_PACKAGE_libuuid is not set
-# CONFIG_PACKAGE_luci-app-accesscontrol is not set
 # CONFIG_PACKAGE_luci-app-adbyby-plus is not set
 # CONFIG_PACKAGE_luci-app-arpbind is not set
-# CONFIG_PACKAGE_luci-app-autoreboot is not set
 # CONFIG_PACKAGE_luci-app-ddns is not set
 # CONFIG_PACKAGE_luci-app-filetransfer is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus is not set
