@@ -76,7 +76,7 @@ LOG='$LOG'
 sed -i "88a\		ifdown $INTERFACE" feeds/packages/net/mwan3/files/etc/hotplug.d/iface/15-mwan3
 sed -i "89a\		sleep 3" feeds/packages/net/mwan3/files/etc/hotplug.d/iface/15-mwan3
 sed -i "90a\		ifup $INTERFACE" feeds/packages/net/mwan3/files/etc/hotplug.d/iface/15-mwan3
-sed -i "91a\		$LOG notice "Recycled $INTERFACE..."" feeds/packages/net/mwan3/files/etc/hotplug.d/iface/15-mwan3
+sed -i "91a\		$LOG notice \"Recycled $INTERFACE...\"" feeds/packages/net/mwan3/files/etc/hotplug.d/iface/15-mwan3
 
 
 #echo "时区设置"
