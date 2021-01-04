@@ -45,6 +45,7 @@ utc_name='Asia\/Shanghai'                                                   # �
 delete_bootstrap=false                                                      # 是否删除默认主题 true 、false
 default_theme='luci-theme-edge'                                             # 默认主题 结合主题文件夹名字
 openClash_url='https://github.com/vernesong/OpenClash.git'                  # OpenClash包地址
+date=`date +%m.%d.%Y`
 upgrade_url='https://github.com/gogogojason/upgrade.git'
 
 echo "修改版本信息"
@@ -68,11 +69,14 @@ sed -i 's/+luci-theme-bootstrap/+luci-theme-edge/g' feeds/luci/collections/luci/
 sed -i "s/bootstrap/argon/g" feeds/luci/modules/luci-base/root/etc/config/luci
 sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 
-echo "添加软件包"
-sed -i 's/exit 0//g' package/lean/default-settings/files/zzz-default-settings
-a='$a' 
-echo "sed -i '$a src/gz jason_packages http://openwrt.ink:8666/RedMi2100/Packages' /etc/opkg/distfeeds.conf" >>package/lean/default-settings/files/zzz-default-settings
-echo 'exit 0' >>package/lean/default-settings/files/zzz-default-settings
+#echo "添加软件包"
+#sed -i 's/exit 0//g' package/lean/default-settings/files/zzz-default-settings
+#a='$a' 
+#echo "sed -i '$a src/gz jason_packages http://openwrt.ink:8666/RedMi2100/Packages' /etc/opkg/distfeeds.conf" >>package/lean/default-settings/files/zzz-default-settings
+#echo 'exit 0' >>package/lean/default-settings/files/zzz-default-settings
+
+echo "设置版本号"
+sed -i "s/# REVISION:=x/REVISION:= $date/g" include/version.mk
 
 #echo "修改版本信息"
 #sed -i "s/$ver_op/$ver_op\/hfy166 Ver.$ver_name/g" package/lean/default-settings/files/zzz-default-settings
@@ -117,11 +121,12 @@ EOF
 # 第三方插件选择:
 cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-poweroff=y #关机（增加关机功能）
+CONFIG_PACKAGE_luci-app-gpsysupgrade=y
 CONFIG_PACKAGE_luci-theme-edge=y #edge主题
 CONFIG_PACKAGE_luci-theme-bootstrap=y
-CONFIG_PACKAGE_luci-app-wrtbwmon-zh=y
-CONFIG_PACKAGE_luci-app-wrtbwmon-zhcn=y
-CONFIG_PACKAGE_wrtbwmon=y
+#CONFIG_PACKAGE_luci-app-wrtbwmon-zh=y
+#CONFIG_PACKAGE_luci-app-wrtbwmon-zhcn=y
+#CONFIG_PACKAGE_wrtbwmon=y
 EOF
 
 
