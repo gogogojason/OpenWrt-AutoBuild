@@ -50,6 +50,7 @@ utc_name='Asia\/Shanghai'                                                   # �
 delete_bootstrap=false                                                      # 是否删除默认主题 true 、false
 default_theme='luci-theme-edge'                                             # 默认主题 结合主题文件夹名字
 openClash_url='https://github.com/vernesong/OpenClash.git'                  # OpenClash包地址
+date=`date +%m.%d.%Y`
 upgrade_url='https://github.com/gogogojason/upgrade.git'
 
 echo "修改版本信息"
@@ -73,11 +74,14 @@ sed -i 's/+luci-theme-bootstrap/+luci-theme-edge/g' feeds/luci/collections/luci/
 sed -i "s/bootstrap/argon/g" feeds/luci/modules/luci-base/root/etc/config/luci
 sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 
-echo "添加软件包"
-sed -i 's/exit 0//g' package/lean/default-settings/files/zzz-default-settings
-a='$a' 
-echo "sed -i '$a src/gz jason_packages http://openwrt.ink:8666/RedMi2100/Packages' /etc/opkg/distfeeds.conf" >>package/lean/default-settings/files/zzz-default-settings
-echo 'exit 0' >>package/lean/default-settings/files/zzz-default-settings
+#echo "添加软件包"
+#sed -i 's/exit 0//g' package/lean/default-settings/files/zzz-default-settings
+#a='$a' 
+#echo "sed -i '$a src/gz jason_packages http://openwrt.ink:8666/RedMi2100/Packages' /etc/opkg/distfeeds.conf" >>package/lean/default-settings/files/zzz-default-settings
+#echo 'exit 0' >>package/lean/default-settings/files/zzz-default-settings
+
+echo "设置版本号"
+sed -i "s/# REVISION:=x/REVISION:= $date/g" include/version.mk
 
 #echo "添加软件包"
 #sed -i '$a sed -i \'$a src/gz jason_packages http://openwrt.ink:8666/RedMi2100/Packages/\' /etc/opkg/distfeeds.conf' package/lean/default-settings/files/zzz-default-settings
@@ -126,10 +130,11 @@ EOF
 cat >> .config <<EOF
 # CONFIG_PACKAGE_luci-app-oaf=y #应用过滤
 CONFIG_PACKAGE_luci-app-openclash=y #OpenClash客户端
+CONFIG_PACKAGE_luci-app-gpsysupgrade=y
 CONFIG_PACKAGE_luci-app-serverchan=y #微信推送
 CONFIG_PACKAGE_luci-app-eqos=y #IP限速
 # CONFIG_PACKAGE_luci-app-control-weburl=y #网址过滤
-CONFIG_PACKAGE_luci-app-smartdns=y #smartdns服务器
+#CONFIG_PACKAGE_luci-app-smartdns=y #smartdns服务器
 CONFIG_PACKAGE_luci-app-adguardhome=y #ADguardhome
 CONFIG_PACKAGE_luci-app-poweroff=y #关机（增加关机功能）
 # CONFIG_PACKAGE_luci-app-argon-config=y #argon主题设置
@@ -141,10 +146,10 @@ CONFIG_PACKAGE_luci-app-mwan3=y
 CONFIG_PACKAGE_luci-app-mwan3helper=y
 CONFIG_PACKAGE_luci-app-syncdial=y
 CONFIG_PACKAGE_luci-app-ttyd=y
-CONFIG_PACKAGE_luci-app-wrtbwmon-zh=y
+#CONFIG_PACKAGE_luci-app-wrtbwmon-zh=y
 # CONFIG_PACKAGE_luci-app-wrtbwmon is not set
-CONFIG_PACKAGE_luci-app-wrtbwmon-zhcn=y
-CONFIG_PACKAGE_wrtbwmon=y
+#CONFIG_PACKAGE_luci-app-wrtbwmon-zhcn=y
+#CONFIG_PACKAGE_wrtbwmon=y
 CONFIG_PACKAGE_luci-app-webadmin=y
 CONFIG_PACKAGE_luci-app-zerotier=y
 CONFIG_PACKAGE_luci-app-sfe=y
@@ -161,15 +166,33 @@ CONFIG_PACKAGE_luci-app-accesscontrol=y #上网时间控制
 #CONFIG_PACKAGE_luci-app-nps=y
 EOF
 
+# 添加Passwall+:
+cat >> .config <<EOF
+CONFIG_PACKAGE_luci-app-bypass=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Shadowsocks_Server=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_ShadowsocksR_Server=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Simple_obfs=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Simple_obfs_server=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_V2ray_plugin=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_V2ray=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Xray=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan=y
+# CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan-Go is not set
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_NaiveProxy=y
+# CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Kcptun is not set
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Socks5_Proxy=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Socks_Server=y
+EOF
+
 # VSSR插件:
 #cat >> .config <<EOF
-CONFIG_PACKAGE_luci-app-vssr=y
+#CONFIG_PACKAGE_luci-app-vssr=y
 # CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray_plugin is not set
 # CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray is not set
-CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Xray=y
+#CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Xray=y
 # CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Trojan is not set
 # CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Kcptun is not set
-CONFIG_PACKAGE_luci-app-vssr_INCLUDE_ShadowsocksR_Server=y
+#CONFIG_PACKAGE_luci-app-vssr_INCLUDE_ShadowsocksR_Server=y
 #EOF
 
 # ShadowsocksR插件:
@@ -182,11 +205,11 @@ CONFIG_PACKAGE_luci-app-vssr_INCLUDE_ShadowsocksR_Server=y
 #EOF
 
 # Passwall插件:
-cat >> .config <<EOF
-CONFIG_PACKAGE_luci-app-passwall=y
+#cat >> .config <<EOF
+#CONFIG_PACKAGE_luci-app-passwall=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ipt2socks=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin is not set
@@ -196,13 +219,13 @@ CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_kcptun is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_haproxy is not set
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd=y
 # CONFIG_PACKAGE_https-dns-proxy is not set
 # CONFIG_PACKAGE_kcptun-client is not set
 # CONFIG_PACKAGE_chinadns-ng is not set
 # CONFIG_PACKAGE_haproxy is not set
-CONFIG_PACKAGE_xray=y
+#CONFIG_PACKAGE_xray=y
 # CONFIG_PACKAGE_v2ray is not set
 # CONFIG_PACKAGE_v2ray-plugin is not set
 # CONFIG_PACKAGE_simple-obfs is not set
@@ -219,7 +242,7 @@ CONFIG_PACKAGE_xray=y
 # CONFIG_PACKAGE_shadowsocksr-libev-ssr-local is not set
 # CONFIG_PACKAGE_pdnsd-alt is not set
 # CONFIG_PACKAGE_dns2socks is not set
-EOF
+#EOF
 
 
 # vssr-plus插件配置#
