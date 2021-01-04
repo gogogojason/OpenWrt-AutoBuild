@@ -88,6 +88,7 @@ jobs:
         echo "FILE_DATE1=$(date "+%Y年%m月%d号-%H点%M分")" >> $GITHUB_ENV
         echo "FILE_DATE2=$(date "+%Y%m%d-%H%M")" >> $GITHUB_ENV
         echo "FILE_DATE3=$(date "+%Y%m%d")" >> $GITHUB_ENV
+        echo "FILE_DATE4=$(date "+%m.%d")" >> $GITHUB_ENV
         
     - name: 加载源,定制文件并生成自定义配置
       run: |
@@ -145,6 +146,7 @@ jobs:
       id: organizer
       run: |
         mkdir -p ./artifact/firmware
+        echo "$(TZ=UTC-8 date "+%m.%d.%Y")" >>./artifact/firmware/version.txt
         mkdir -p ./artifact/vmware
         mkdir -p ./artifact/package
         mkdir -p ./artifact/buildinfo
@@ -153,7 +155,7 @@ jobs:
         cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
         cp -rf $(find openwrt/bin/targets/ -type f -name "*combined.img*" -o -name "*sysupgrade*bin*") ./artifact/firmware/
         cd artifact/firmware
-        rename -v "s/openwrt-x86-64-generic-squashfs-combined/${{matrix.target}}-Ver${{ env.FILE_DATE3 }}/" *gz
+        rename -v "s/openwrt/${{ env.FILE_DATE4 }}-openwrt/" *gz
         echo "::set-output name=status::success"
 
     - name: 上传固件文件
@@ -207,7 +209,7 @@ jobs:
         FOLDER: ./artifact/firmware/
         SERVER_IP: ${{ secrets.SSH_HOST }} 
         USERNAME: ${{ secrets.SSH_USERNAME }} 
-        SERVER_DESTINATION: /mnt/disk2/appdata/h5ai/Lean_x86_64/
+        SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}x86_64/
         
     - name: 进入目录删除
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_MYPAN == 'true'
@@ -225,7 +227,7 @@ jobs:
         FOLDER: ./artifact/package/
         SERVER_IP: ${{ secrets.SSH_HOST }} 
         USERNAME: ${{ secrets.SSH_USERNAME }} 
-        SERVER_DESTINATION: /mnt/disk2/appdata/h5ai/Lean_x86_64/Packages/        
+        SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}x86_64/Packages/        
     
     - name: 提取发布用的「奶牛快传」和「WeTransfer」的链接
       if: steps.organizer.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true'
