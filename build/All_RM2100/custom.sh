@@ -175,7 +175,7 @@ CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Simple_obfs=y
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Simple_obfs_server=y
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_V2ray_plugin=y
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_V2ray=y
-CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Xray=y
+# CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Xray=y
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan=y
 # CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan-Go is not set
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_NaiveProxy=y
@@ -225,7 +225,7 @@ EOF
 # CONFIG_PACKAGE_kcptun-client is not set
 # CONFIG_PACKAGE_chinadns-ng is not set
 # CONFIG_PACKAGE_haproxy is not set
-#CONFIG_PACKAGE_xray=y
+# CONFIG_PACKAGE_xray is not set
 # CONFIG_PACKAGE_v2ray is not set
 # CONFIG_PACKAGE_v2ray-plugin is not set
 # CONFIG_PACKAGE_simple-obfs is not set
