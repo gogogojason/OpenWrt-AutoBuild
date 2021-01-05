@@ -194,56 +194,56 @@ cat >> .config <<EOF
 EOF
 
 # Passwall插件:
-cat >> .config <<EOF
-CONFIG_PACKAGE_luci-app-passwall=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ipt2socks=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_kcptun=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_haproxy=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks=y
-CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd=y
-CONFIG_PACKAGE_https-dns-proxy=y
-CONFIG_PACKAGE_kcptun-client=y
-CONFIG_PACKAGE_chinadns-ng=y
-CONFIG_PACKAGE_haproxy=y
-CONFIG_PACKAGE_xray=y
-CONFIG_PACKAGE_v2ray=y
-CONFIG_PACKAGE_v2ray-plugin=y
-CONFIG_PACKAGE_simple-obfs=y
-CONFIG_PACKAGE_trojan-plus=y
-CONFIG_PACKAGE_trojan-go=y
-CONFIG_PACKAGE_brook=y
-CONFIG_PACKAGE_ssocks=y
-CONFIG_PACKAGE_naiveproxy=y
-CONFIG_PACKAGE_ipt2socks=y
-CONFIG_PACKAGE_shadowsocks-libev-config=y
-CONFIG_PACKAGE_shadowsocks-libev-ss-local=y
-CONFIG_PACKAGE_shadowsocks-libev-ss-redir=y
-CONFIG_PACKAGE_shadowsocksr-libev-alt=y
-CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=y
-CONFIG_PACKAGE_pdnsd-alt=y
-CONFIG_PACKAGE_dns2socks=y
-EOF
+#cat >> .config <<EOF
+#CONFIG_PACKAGE_luci-app-passwall=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ipt2socks=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_kcptun=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_haproxy=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks=y
+#CONFIG_PACKAGE_luci-app-passwall_INCLUDE_pdnsd=y
+#CONFIG_PACKAGE_https-dns-proxy=y
+#CONFIG_PACKAGE_kcptun-client=y
+#CONFIG_PACKAGE_chinadns-ng=y
+#CONFIG_PACKAGE_haproxy=y
+#CONFIG_PACKAGE_xray=y
+#CONFIG_PACKAGE_v2ray=y
+#CONFIG_PACKAGE_v2ray-plugin=y
+#CONFIG_PACKAGE_simple-obfs=y
+#CONFIG_PACKAGE_trojan-plus=y
+#CONFIG_PACKAGE_trojan-go=y
+#CONFIG_PACKAGE_brook=y
+#CONFIG_PACKAGE_ssocks=y
+#CONFIG_PACKAGE_naiveproxy=y
+#CONFIG_PACKAGE_ipt2socks=y
+#CONFIG_PACKAGE_shadowsocks-libev-config=y
+#CONFIG_PACKAGE_shadowsocks-libev-ss-local=y
+#CONFIG_PACKAGE_shadowsocks-libev-ss-redir=y
+#CONFIG_PACKAGE_shadowsocksr-libev-alt=y
+#CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=y
+#CONFIG_PACKAGE_pdnsd-alt=y
+#CONFIG_PACKAGE_dns2socks=y
+#EOF
 
 # VSSR专用插件:
-cat >> .config <<EOF
-CONFIG_PACKAGE_luci-app-vssr=y
-CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray_plugin=y
-CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray=y
-CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Xray=y
-CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Trojan=y
-CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Kcptun=y
-CONFIG_PACKAGE_luci-app-vssr_INCLUDE_ShadowsocksR_Server=y
-CONFIG_PACKAGE_lua-maxminddb=y
-EOF
+#cat >> .config <<EOF
+#CONFIG_PACKAGE_luci-app-vssr=y
+#CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray_plugin=y
+#CONFIG_PACKAGE_luci-app-vssr_INCLUDE_V2ray=y
+#CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Xray=y
+#CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Trojan=y
+#CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Kcptun=y
+#CONFIG_PACKAGE_luci-app-vssr_INCLUDE_ShadowsocksR_Server=y
+#CONFIG_PACKAGE_lua-maxminddb=y
+#EOF
 
 # 磁盘管理插件:
 cat >> .config <<EOF
@@ -266,13 +266,31 @@ CONFIG_PACKAGE_luci-app-mwan3helper=y
 CONFIG_PACKAGE_luci-app-nps=y
 CONFIG_PACKAGE_luci-app-poweroff=y
 CONFIG_PACKAGE_luci-app-serverchan=y
-CONFIG_PACKAGE_luci-app-smartdns=y
+#CONFIG_PACKAGE_luci-app-smartdns=y
 CONFIG_PACKAGE_luci-app-socat=y
 CONFIG_PACKAGE_luci-app-syncdial=y
 CONFIG_PACKAGE_luci-app-ttyd=y
 #CONFIG_PACKAGE_luci-app-eqos=y
 #CONFIG_PACKAGE_luci-app-wrtbwmon-zh=y
-CONFIG_PACKAGE_smartdns=y
+#CONFIG_PACKAGE_smartdns=y
+EOF
+
+# 添加Passwall+:
+cat >> .config <<EOF
+CONFIG_PACKAGE_luci-app-bypass=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Shadowsocks_Server=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_ShadowsocksR_Server=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Simple_obfs=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Simple_obfs_server=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_V2ray_plugin=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_V2ray=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Xray=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan=y
+# CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan-Go is not set
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_NaiveProxy=y
+# CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Kcptun is not set
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Socks5_Proxy=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Socks_Server=y
 EOF
 
 
