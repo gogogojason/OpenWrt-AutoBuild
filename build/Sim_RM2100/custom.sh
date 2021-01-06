@@ -10,7 +10,8 @@ cat feeds.conf.default
 
 
 # 添加第三方软件包
-git clone https://github.com/gogogojason/OpenWrt-Packages.git package/jason
+#git clone https://github.com/gogogojason/OpenWrt-Packages.git package/jason
+git clone https://github.com/gogogojason/oppackages.git package/jason
 #git clone https://github.com/gogogojason/luci-theme-edge -b 18.06 package/lean/luci-theme-edge
 #git clone https://github.com/sirpdboy/luci-app-autopoweroff.git package/lean/luci-app-autopoweroff
 #git clone --depth=1 https://github.com/tty228/luci-app-serverchan.git package/lean/luci-app-serverchan
@@ -193,9 +194,9 @@ CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Simple_obfs=y
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Simple_obfs_server=y
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_V2ray_plugin=y
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_V2ray=y
-CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Xray is not set
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Xray=y
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan=y
-CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan-Go is not set
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan-Go=y
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_NaiveProxy=y
 # CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Kcptun is not set
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Socks5_Proxy=y
