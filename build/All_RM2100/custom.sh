@@ -12,7 +12,8 @@ cat feeds.conf.default
 
 
 # 添加第三方软件包
-git clone https://github.com/gogogojason/OpenWrt-Packages.git package/jason
+#git clone https://github.com/gogogojason/OpenWrt-Packages.git package/jason
+git clone https://github.com/gogogojason/oppackages.git package/jason
 #svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/luci-app-openclash
 #git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/lean/luci-app-adguardhome
 #git clone https://github.com/garypang13/luci-theme-edge -b 18.06 package/lean/luci-theme-edge
@@ -177,7 +178,7 @@ CONFIG_PACKAGE_luci-app-bypass_INCLUDE_V2ray_plugin=y
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_V2ray=y
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Xray=y
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan=y
-CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan-Go is not set
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan-Go=y
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_NaiveProxy=y
 # CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Kcptun is not set
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Socks5_Proxy=y
