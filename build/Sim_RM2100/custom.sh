@@ -9,7 +9,7 @@
 cat feeds.conf.default
 
 # 添加第三方软件包
-git clone https://github.com/gogogojason/oppackages.git package/jason
+git clone https://github.com/gogogojason/OpenWrt-Packages.git package/jason
 
 # 更新并安装源
 ./scripts/feeds clean
