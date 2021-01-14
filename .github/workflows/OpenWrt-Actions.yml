@@ -136,6 +136,8 @@ jobs:
         echo "修改地址"
         sed -i 's/firmware\/redmi-ac2100/firmware\/${{matrix.target}}/g' package/jason/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
         sed -i 's/firmware\/redmi-ac2100/firmware\/${{matrix.target}}/g' package/jason/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua     
+        sed -i 's/firmware\/x86_64/firmware\/Lean_x86_64/g' package/jason/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+        sed -i 's/firmware\/x86_64/firmware\/Lean_x86_64/g' package/jason/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
         
 
         echo "写入配置文件"
