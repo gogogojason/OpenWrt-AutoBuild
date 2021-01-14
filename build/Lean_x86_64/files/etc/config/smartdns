@@ -1,4 +1,5 @@
 
+
 config smartdns
 	option port '6053'
 	option tcp_server '1'
@@ -24,9 +25,10 @@ config smartdns
 	option seconddns_server_group 'us'
 	option server_name 'china'
 	option seconddns_port '7913'
+	option enabled '1'
 	list old_redirect 'none'
 	list old_port '6053'
-	list old_enabled '0'
+	list old_enabled '1'
 
 config server
 	option enabled '1'
@@ -137,38 +139,6 @@ config server
 	option type 'udp'
 	option ip '114.114.115.115'
 	option name '114 DNS2'
-	option server_group 'china'
-	option blacklist_ip '0'
-
-config server
-	option enabled '1'
-	option ip '221.179.155.161'
-	option type 'tcp'
-	option name 'bendidns1'
-	option server_group 'china'
-	option blacklist_ip '0'
-
-config server
-	option enabled '1'
-	option ip '221.179.155.177'
-	option type 'tcp'
-	option name 'bendidns2'
-	option server_group 'china'
-	option blacklist_ip '0'
-
-config server
-	option enabled '1'
-	option type 'udp'
-	option name 'bendidns3'
-	option ip '221.179.155.161'
-	option server_group 'china'
-	option blacklist_ip '0'
-
-config server
-	option enabled '1'
-	option type 'udp'
-	option name 'bendidns4'
-	option ip '221.179.155.177'
 	option server_group 'china'
 	option blacklist_ip '0'
 
