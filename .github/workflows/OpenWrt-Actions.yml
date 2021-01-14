@@ -34,7 +34,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [Lean_x86_64]  #[Lean_x86_64,All_RM2100,Sim_RM2100,Ap_RM2100,Lienol_x86_64,]
+        target: [All_RM2100]  #[Lean_x86_64,All_RM2100,Sim_RM2100,Ap_RM2100,Lienol_x86_64,]
 
     steps:
     - name: 准备完成
@@ -136,9 +136,7 @@ jobs:
         echo "修改地址"
         sed -i 's/firmware\/redmi-ac2100/firmware\/${{matrix.target}}/g' package/jason/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
         sed -i 's/firmware\/redmi-ac2100/firmware\/${{matrix.target}}/g' package/jason/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua     
-        sed -i 's/firmware\/x86_64/firmware\/Lean_x86_64/g' package/jason/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
-        sed -i 's/firmware\/x86_64/firmware\/Lean_x86_64/g' package/jason/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
-        
+     
 
         echo "写入配置文件"
         mv build/${{matrix.target}}/$CONFIG_FILE .config
