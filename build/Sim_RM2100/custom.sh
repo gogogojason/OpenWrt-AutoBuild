@@ -1,13 +1,6 @@
 
 #!/bin/bash
 
-# 安装额外依赖软件包
-# sudo -E apt-get -y install rename
-
-# 更新feeds文件
-# sed -i 's@#src-git helloworld@src-git helloworld@g' feeds.conf.default #启用helloworld
-cat feeds.conf.default
-
 # 添加第三方软件包
 git clone https://github.com/gogogojason/OpenWrt-Packages.git package/jason
 
@@ -139,19 +132,19 @@ EOF
 # 添加Passwall+:
 cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-bypass=y
-CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Shadowsocks_Server=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Shadowsocks_Server=n
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_ShadowsocksR_Server=y
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Simple_obfs=y
-CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Simple_obfs_server=y
-CONFIG_PACKAGE_luci-app-bypass_INCLUDE_V2ray_plugin=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Simple_obfs_server=n
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_V2ray_plugin=n
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_V2ray=y
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Xray=y
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan=y
-CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan-Go=y
-CONFIG_PACKAGE_luci-app-bypass_INCLUDE_NaiveProxy=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Trojan-Go=n
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_NaiveProxy=n
 # CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Kcptun is not set
 CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Socks5_Proxy=y
-CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Socks_Server=y
+CONFIG_PACKAGE_luci-app-bypass_INCLUDE_Socks_Server=n
 EOF
 
 # 去掉默认设置:
