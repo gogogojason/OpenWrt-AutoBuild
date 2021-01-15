@@ -82,6 +82,14 @@ jobs:
         git clone -b $REPO_BRANCH --single-branch $REPO_URL openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         
+    - name: Trigger Packages Update
+      if: github.event.repository.owner.id == '48883331' && ! contains(github.event.action, 'nopd')
+      run: |
+        curl -X POST https://api.github.com/repos/gogogojason/OpenWrt-Packages/dispatches \
+        -H "Accept: application/vnd.github.everest-preview+json" \
+        -H "Authorization: token ${{ secrets.REPO_TOKEN }}" \
+        --data '{"event_type": "update"}'
+        
     - name: Free up disk space
       env:
         DEBIAN_FRONTEND: noninteractive
